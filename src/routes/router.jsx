@@ -22,6 +22,7 @@ const RoutesConfig = () => {
             {/* Dashboard */}
             <Route path="/dashboard/*" element={<LayOut />}>
                 <Route index element={<DashBoard />} />
+
                 <Route path="job_describtion" element={<JobDescIndex />} />
                 <Route path="interview" element={<h2>Interview Page</h2>} />
                 <Route path="candidate" element={<h2>Candidate Page</h2>} />
@@ -30,6 +31,7 @@ const RoutesConfig = () => {
                 <Route path="vendor" element={<h2>Vendor Page</h2>} />
                 <Route path="settings" element={<h2>Settings Page</h2>} />
                 <Route path="profile" element={<h2>Profile Page</h2>} />
+                
            </Route>
 
         </Routes>
