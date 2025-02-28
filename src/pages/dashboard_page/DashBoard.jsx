@@ -124,8 +124,6 @@ function ResponsiveAppBar() {
             />
           </Button>
 
-          {/* Mobile Menu */}
-
           {/* Desktop Navigation */}
           <Box
             sx={{
