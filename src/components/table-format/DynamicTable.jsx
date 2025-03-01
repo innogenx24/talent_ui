@@ -100,10 +100,10 @@ const DynamicTable = ({ columns, data, onEdit, onDelete, rowsPerPage = 10 }) => 
                 <TableCell align="center">
                   <Box display="flex" justifyContent="center" gap={1}>
                     <Button onClick={() => onEdit(row)} sx={{ minWidth: "30px", p: 0 }}>
-                      <img src={EditIcon} alt="Edit" width="35" height="28" />
+                      <img src={EditIcon} alt="Edit" width="45" height="35" />
                     </Button>
                     <Button onClick={() => onDelete(row)} sx={{ minWidth: "30px", p: 0 }}>
-                      <img src={DeleteIcon} alt="Delete" width="35" height="28" />
+                      <img src={DeleteIcon} alt="Delete" width="45" height="35" />
                     </Button>
                   </Box>
                 </TableCell>
