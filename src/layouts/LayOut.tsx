@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
-import Sidebar from "../pages/job_desc_page/Sidebar";
+import Sidebar from "../sidebar/Sidebar";
 import NavLogo from "../assets/logos/NavLogo.svg";
 import BackwardIcon from "../assets/logos/BackwordIcon.svg";
 import ForwardIcon from "../assets/logos/ForvordIcon.svg";
@@ -38,6 +38,7 @@ const LayOut = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [selectedTab, setSelectedTab] = useState(0);
   const [menuAnchor, setMenuAnchor] = useState(null);
+  const [section, setSection] = useState(""); // Initialize empty or default section
 
   // Function to determine which section the user is on
   const getSection = () => {
@@ -49,6 +50,8 @@ const LayOut = () => {
     if (location.pathname.includes("/dashboard/operations"))
       return "operations";
     if (location.pathname.includes("/dashboard/vendor")) return "vendor";
+    if (location.pathname.includes("/dashboard/settings")) return "settings"; // Added settings
+
     return "dashboard";
   };
 
@@ -160,7 +163,8 @@ const LayOut = () => {
                   label={item.label}
                   sx={{
                     textTransform: "none",
-                    fontWeight: selectedTab === index ? "bold" : "normal",
+                    // fontWeight: selectedTab === index ? "bold" : "normal",
+                    fontWeight: "bold !important",
                   }}
                 />
               ))}
@@ -168,7 +172,7 @@ const LayOut = () => {
           )}
 
           {/* Right Side Icons */}
-          <Box display="flex" alignItems="center">
+          <Box display="flex" alignItems="left">
             {/* Mobile Menu */}
             {isMobile && (
               <>
@@ -193,7 +197,12 @@ const LayOut = () => {
             )}
 
             {/* Settings Icon */}
-            <IconButton onClick={() => navigate("/dashboard/settings")}>
+            <IconButton
+              onClick={() => {
+                setSection("settings"); // Set section to settings
+                navigate("/dashboard/settings"); // Navigate to settings page
+              }}
+            >
               <Box
                 component="img"
                 src={SettingIcon}
@@ -202,9 +211,18 @@ const LayOut = () => {
               />
             </IconButton>
 
-            {/* User Avatar */}
-            <Avatar sx={{ ml: 1 }} src="https://via.placeholder.com/40" />
-            <Typography sx={{ color: "#171719", ml: 1 }}>Ajay Kumar</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/dashboard/profile")}
+            >
+              <Avatar src="https://via.placeholder.com/40" />
+              <Typography sx={{ color: "#171719" }}>Ajay Kumar</Typography>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

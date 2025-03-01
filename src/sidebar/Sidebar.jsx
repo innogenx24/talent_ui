@@ -14,6 +14,18 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import PeopleIcon from "@mui/icons-material/People";
 import GroupIcon from "@mui/icons-material/Group";
 import BusinessIcon from "@mui/icons-material/Business";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import ContactsIcon from "@mui/icons-material/Contacts";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import TimelineIcon from "@mui/icons-material/Timeline";
+import DescriptionIcon from "@mui/icons-material/Description";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
+
 
 const drawerWidth = 150;
 
@@ -43,41 +55,71 @@ const Sidebar = ({ section }) => {
       ];
       break;
   
-    case "candidate":
-      menuItems = [
-        {
-          text: "Candidates List",
-          path: "/dashboard/candidate",
-          icon: <GroupIcon />,
-        },
-        {
-          text: "Shortlisted",
-          path: "/dashboard/candidate/shortlisted",
-          icon: <AssignmentIcon />,
-        },
-      ];
-      break;
+      case "candidate":
+        menuItems = [
+          {
+            text: "Candidates List",
+            path: "/dashboard/candidate",
+            icon: <GroupIcon />,
+          },
+          {
+            text: "Resume Bank",
+            path: "/dashboard/candidate/resume-bank",
+            icon: <DescriptionIcon />, 
+          },
+          {
+            text: "Bench",
+            path: "/dashboard/candidate/bench",
+            icon: <PlaylistAddCheckIcon />, 
+          },
+          {
+            text: "OnBoarding",
+            path: "/dashboard/candidate/on-boarding",
+            icon: <AssignmentIcon />, 
+          },
+          {
+            text: "UpComing OffBoardings",
+            path: "/dashboard/candidate/upcoming-off-boardings",
+            icon: <ExitToAppIcon />, 
+          },
+          {
+            text: "OffBoarded",
+            path: "/dashboard/candidate/off-boarded",
+            icon: <AssignmentIcon />, 
+          },
+        ];
+        break;
   
-    case "crm":
-      menuItems = [
-        { text: "Client List", path: "/dashboard/crm", icon: <BusinessIcon /> },
-        {
-          text: "Leads",
-          path: "/dashboard/crm/leads",
-          icon: <AssignmentIcon />,
-        },
-      ];
-      break;
   
-    case "operations":
-      menuItems = [
-        {
-          text: "Operations List",
-          path: "/dashboard/operations",
-          icon: <BusinessIcon />,
-        },
-      ];
-      break;
+      case "crm":
+        menuItems = [
+          { text: "Client List", path: "/dashboard/crm", icon: <BusinessCenterIcon /> },
+
+          { text: "Contacts", path: "/dashboard/crm/contacts", icon: <ContactsIcon /> },
+          { text: "Quotations", path: "/dashboard/crm/quotations", icon: <ReceiptLongIcon /> },
+          {
+            text: "Orders",
+            path: "/dashboard/crm/orders",
+            icon: <AssignmentIcon />,
+          },
+        ];
+        break;
+  
+  
+      case "operations":
+        menuItems = [
+          {
+            text: "Accounts",
+            path: "/dashboard/operations",
+            icon: <AccountBalanceIcon />,
+          },
+          {
+            text: "Invoices",
+            path: "/dashboard/operations/invoices",
+            icon: <ReceiptIcon />,
+          },
+        ];
+        break;
   
     case "vendor":
       menuItems = [
@@ -88,17 +130,39 @@ const Sidebar = ({ section }) => {
         },
       ];
       break;
+    
   
-    // ✅ Default menu when no section is matched
-    default:
-      menuItems = [
-        {
-          text: "Settings",
-          path: "/dashboard/settings",
-          icon: <WorkIcon />,
-        },
-      ];
-      break;
+    case "settings":
+        menuItems = [
+          {
+            text: "Users",
+            path: "/dashboard/settings",
+            icon: <PeopleIcon />,
+          },
+          {
+            text: "Roles",
+            path: "/dashboard/settings/roles",
+            icon: <AdminPanelSettingsIcon />,
+          },
+          {
+            text: "Experience Range",
+            path: "/dashboard/settings/experience-range",
+            icon: <TimelineIcon />,
+          },
+          {
+            text: "Department",
+            path: "/dashboard/settings/department",
+            icon: <BusinessIcon />,
+          },
+          {
+            text: "Branches",
+            path: "/dashboard/settings/branches",
+            icon: <ApartmentIcon />,
+          },
+        ];
+        break;
+
+      default:
   }
   
 
