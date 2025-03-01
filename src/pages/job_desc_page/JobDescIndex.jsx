@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Typography } from "@mui/material";
 
-const JobDescIndex = () => {
+const JobDescription = () => {
   return (
-    <div>JobDescIndex</div>
-  )
-}
+    <div>
+      <Typography variant="h4">Job Description</Typography>
+      <Typography variant="body1">This is the job description page.</Typography>
+    </div>
+  );
+};
 
-export default JobDescIndex
+export default JobDescription;
