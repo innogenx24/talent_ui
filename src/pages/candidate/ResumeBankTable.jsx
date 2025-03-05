@@ -4,7 +4,7 @@ import DynamicTable from "../../components/table-format/DynamicTable";
 
 const ResumeBankTable = () => {
   const columns = [
-    { id: "resume_id", label: "Resume ID" },
+    { id: "id", label: "No." },
     { id: "candidate_name", label: "Candidate Name" },
     { id: "position", label: "Position" },
     { id: "experience", label: "Experience" },
@@ -12,8 +12,8 @@ const ResumeBankTable = () => {
   ];
 
   const data = [
-    { resume_id: "RES001", candidate_name: "John Doe", position: "Software Engineer", experience: "3 years", status: "Available" },
-    { resume_id: "RES002", candidate_name: "Jane Smith", position: "Data Scientist", experience: "5 years", status: "Hired" },
+    { id: 1, candidate_name: "John Doe", position: "Software Engineer", experience: "3 years", status: "Available" },
+    { id: 2, candidate_name: "Jane Smith", position: "Data Scientist", experience: "5 years", status: "Hired" },
   ];
 
   return (

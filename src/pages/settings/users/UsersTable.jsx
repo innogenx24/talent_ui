@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import DynamicTable from "../../components/table-format/DynamicTable";
+import DynamicTable from "../../../components/table-format/DynamicTable";
 
 const UsersTable = () => {
   const columns = [
-    { id: "id", label: "ID" },
+    { id: "id", label: "No." },
     { id: "name", label: "Name" },
     { id: "email", label: "Email" },
     { id: "role", label: "Role" },

@@ -155,8 +155,8 @@ const Sidebar = ({ section }) => {
             icon: <BusinessIcon />,
           },
           {
-            text: "Branches",
-            path: "/dashboard/settings/branches",
+            text: "Branch",
+            path: "/dashboard/settings/branch",
             icon: <ApartmentIcon />,
           },
         ];
@@ -233,7 +233,7 @@ const Sidebar = ({ section }) => {
                       fontSize: "0.95rem !important",
                       lineHeight: "1.05 !important",
                       textAlign: "center",
-                      display: "block", // Ensures the styles apply
+                      display: "block", 
                     }}
                   >
                     {item.text}

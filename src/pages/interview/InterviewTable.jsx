@@ -4,7 +4,7 @@ import DynamicTable from "../../components/table-format/DynamicTable";
 
 const InterviewTable = () => {
   const columns = [
-    { id: "id", label: "ID" },
+    { id: "id", label: "No." },
     { id: "candidateName", label: "Candidate Name" },
     { id: "position", label: "Position" },
     { id: "interviewDate", label: "Interview Date" },

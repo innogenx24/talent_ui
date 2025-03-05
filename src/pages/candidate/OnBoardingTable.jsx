@@ -4,7 +4,7 @@ import DynamicTable from "../../components/table-format/DynamicTable";
 
 const OnBoardingTable = () => {
   const columns = [
-    { id: "employee_id", label: "Employee ID" },
+    { id: "id", label: "No." },
     { id: "employee_name", label: "Employee Name" },
     { id: "position", label: "Position" },
     { id: "joining_date", label: "Joining Date" },
@@ -12,8 +12,8 @@ const OnBoardingTable = () => {
   ];
 
   const data = [
-    { employee_id: "EMP001", employee_name: "Mark Johnson", position: "UI Designer", joining_date: "2023-08-15", status: "Completed" },
-    { employee_id: "EMP002", employee_name: "Sara Wilson", position: "Backend Developer", joining_date: "2023-09-01", status: "In Progress" },
+    { id: 1, employee_name: "Mark Johnson", position: "UI Designer", joining_date: "2023-08-15", status: "Completed" },
+    { id: 2, employee_name: "Sara Wilson", position: "Backend Developer", joining_date: "2023-09-01", status: "In Progress" },
   ];
 
   return (

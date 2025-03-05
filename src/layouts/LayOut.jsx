@@ -20,6 +20,7 @@ import NavLogo from "../assets/logos/NavLogo.svg";
 import BackwardIcon from "../assets/logos/BackwordIcon.svg";
 import ForwardIcon from "../assets/logos/ForvordIcon.svg";
 import SettingIcon from "../assets/logos/SettingIcon.svg";
+import { useSelector } from "react-redux";
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard" },
@@ -40,6 +41,10 @@ const LayOut = () => {
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [section, setSection] = useState(""); // Initialize empty or default section
 
+  const { user } = useSelector((state) => state.auth);
+
+
+  
   // Function to determine which section the user is on
   const getSection = () => {
     if (location.pathname.includes("/dashboard/job_description"))
@@ -80,6 +85,10 @@ const LayOut = () => {
       navigate(navItems[index].path);
     }
   };
+
+
+  // console.log(localStorage.getItem("user"));
+
 
   return (
     <Box
@@ -221,7 +230,7 @@ const LayOut = () => {
               onClick={() => navigate("/dashboard/profile")}
             >
               <Avatar src="https://via.placeholder.com/40" />
-              <Typography sx={{ color: "#171719" }}>Ajay Kumar</Typography>
+              <Typography sx={{ color: "#171719" }}>{user.name}</Typography>
             </Box>
           </Box>
         </Toolbar>

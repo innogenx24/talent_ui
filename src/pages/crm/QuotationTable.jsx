@@ -2,28 +2,27 @@ import React from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../components/table-format/DynamicTable";
 
-const JobDescIndex = () => {
+const QuotationTable = () => {
   const columns = [
     { id: "id", label: "No." },
-    { id: "title", label: "Job Title" },
-    { id: "company", label: "Company" },
-    { id: "location", label: "Location" },
+    { id: "customer_name", label: "Customer Name" },
+    { id: "amount", label: "Amount" },
+    { id: "status", label: "Status" },
   ];
 
   const data = [
-    { id: 1, title: "Software Engineer", company: "Tech Corp", location: "New York" },
-    { id: 2, title: "Data Scientist", company: "AI Solutions", location: "San Francisco" },
+    { id: 1, customer_name: "ABC Corp", amount: "$5,000", status: "Pending" },
+    { id: 2, customer_name: "XYZ Ltd.", amount: "$12,000", status: "Approved" },
   ];
 
   return (
     <>
       <Typography variant="h6" sx={{ color: "#989FA9", mb: 2 }}>
-        Job Descriptions
+        Quotation List
       </Typography>
-
       <DynamicTable columns={columns} data={data} />
     </>
   );
 };
 
-export default JobDescIndex;
+export default QuotationTable;

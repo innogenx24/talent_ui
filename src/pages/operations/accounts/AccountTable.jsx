@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import DynamicTable from "../../components/table-format/DynamicTable";
+import DynamicTable from "../../../components/table-format/DynamicTable";
 
 const AccountTable = () => {
   const columns = [
-    { id: "account_id", label: "Account ID" },
+    { id: "id", label: "No." },
     { id: "account_name", label: "Account Name" },
     { id: "account_type", label: "Account Type" },
     { id: "balance", label: "Balance" },
@@ -12,8 +12,8 @@ const AccountTable = () => {
   ];
 
   const data = [
-    { account_id: "ACC001", account_name: "Main Account", account_type: "Savings", balance: "$5000", status: "Active" },
-    { account_id: "ACC002", account_name: "Business Account", account_type: "Checking", balance: "$12000", status: "Inactive" },
+    { id: 1, account_name: "Main Account", account_type: "Savings", balance: "$5000", status: "Active" },
+    { id: 2, account_name: "Business Account", account_type: "Checking", balance: "$12000", status: "Inactive" },
   ];
 
   return (

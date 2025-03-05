@@ -4,15 +4,15 @@ import DynamicTable from "../../components/table-format/DynamicTable";
 
 const BenchTable = () => {
   const columns = [
-    { id: "candidate_id", label: "Candidate ID" },
+    { id: "id", label: "No." },
     { id: "candidate_name", label: "Candidate Name" },
     { id: "skills", label: "Skills" },
     { id: "availability", label: "Availability" },
   ];
 
   const data = [
-    { candidate_id: "CAND001", candidate_name: "Alice Brown", skills: "React, Node.js", availability: "Available" },
-    { candidate_id: "CAND002", candidate_name: "David Green", skills: "Python, Machine Learning", availability: "Bench" },
+    { id: 1, candidate_name: "Alice Brown", skills: "React, Node.js", availability: "Available" },
+    { id: 2, candidate_name: "David Green", skills: "Python, Machine Learning", availability: "Bench" },
   ];
 
   return (

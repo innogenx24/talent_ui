@@ -4,7 +4,7 @@ import DynamicTable from "../../components/table-format/DynamicTable";
 
 const CRMTable = () => {
   const columns = [
-    { id: "id", label: "ID" },
+    { id: "id", label: "No." },
     { id: "customer_name", label: "Customer Name" },
     { id: "email", label: "Email" },
     { id: "phone", label: "Phone Number" },
@@ -19,7 +19,7 @@ const CRMTable = () => {
   return (
     <>
       <Typography variant="h6" sx={{ color: "#989FA9", mb: 2 }}>
-        CRM Customer List
+        CRM Client List
       </Typography>
 
       <DynamicTable columns={columns} data={data} />

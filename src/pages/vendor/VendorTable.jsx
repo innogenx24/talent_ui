@@ -4,7 +4,7 @@ import DynamicTable from "../../components/table-format/DynamicTable";
 
 const VendorTable = () => {
   const columns = [
-    { id: "id", label: "ID" },
+    { id: "id", label: "No." },
     { id: "vendor_name", label: "Vendor Name" },
     { id: "contact_person", label: "Contact Person" },
     { id: "email", label: "Email" },

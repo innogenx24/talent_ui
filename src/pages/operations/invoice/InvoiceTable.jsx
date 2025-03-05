@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import DynamicTable from "../../components/table-format/DynamicTable";
+import DynamicTable from "../../../components/table-format/DynamicTable";
 
 const InvoiceTable = () => {
   const columns = [
-    { id: "invoice_id", label: "Invoice ID" },
+    { id: "id", label: "No." },
     { id: "client_name", label: "Client Name" },
     { id: "date", label: "Date" },
     { id: "amount", label: "Amount" },
@@ -12,8 +12,8 @@ const InvoiceTable = () => {
   ];
 
   const data = [
-    { invoice_id: "INV001", client_name: "John Doe", date: "2024-02-10", amount: "$1500", status: "Paid" },
-    { invoice_id: "INV002", client_name: "Jane Smith", date: "2024-02-15", amount: "$2200", status: "Pending" },
+    { id: 1, client_name: "John Doe", date: "2024-02-10", amount: "$1500", status: "Paid" },
+    { id: 2, client_name: "Jane Smith", date: "2024-02-15", amount: "$2200", status: "Pending" },
   ];
 
   return (
