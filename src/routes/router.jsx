@@ -52,13 +52,12 @@ import EditAccountForm from "../pages/operations/accounts/EditAccountForm.jsx";
 import AddInvoiceForm from "../pages/operations/invoice/AddInvoiceForm.jsx";
 import InvoiceTable from "../pages/operations/invoice/InvoiceTable.jsx";
 import EditInvoiceForm from "../pages/operations/invoice/EditInvoiceForm.jsx";
+import ClientForm from "../pages/crm/client/ClientForm.jsx";
 
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
 };
-
-
 const RoutesConfig = () => {
   return (
     <>
@@ -72,11 +71,15 @@ const RoutesConfig = () => {
           <Route index element={<DashBoard />} />
 
             <Route path="job_description" element={<JobDescIndex />} />
+            <Route path="job_description/add" element={<JobDescIndex />} />
+            <Route path="job_description/edit/:id" element={<JobDescIndex />} />
+
             <Route path="interview" element={<InterviewTable />} />
             <Route path="interview/add" element={<AddInterview />} />
 
             <Route path="candidate" element={<CandidateTable />} />
             <Route path="crm" element={<CRMTable />} />
+            <Route path="crm/add" element={<ClientForm />} />
             <Route path="crm/quotations" element={<QuotationTable />} />
             <Route path="crm/orders" element={<OrdersTable />} />
             <Route path="crm/contacts" element={<ContactTable />} />
@@ -88,7 +91,7 @@ const RoutesConfig = () => {
             <Route path="operations/invoices" element={<InvoiceTable />} />
             <Route path="operations/invoices/add" element={<AddInvoiceForm />} />
             <Route path="operations/invoices/edit/:id" element={<EditInvoiceForm />} />
-
+            
             <Route
               path="candidate/resume-bank"
               element={<ResumeBankTable />}
