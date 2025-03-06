@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -28,7 +28,7 @@ import StatusOn from "../../assets/logos/turnon.png";
 import API_URL from "../../api/Api_url";
 // API Endpoints Mapping
 const apiEndpoints = {
-  settings: `${API_URL}/users/delete`,
+  settings: `${API_URL}/users`,
   roles: `${API_URL}/roles/delete`,
   department: `${API_URL}/departments/delete`,
 };
@@ -36,27 +36,33 @@ const apiEndpoints = {
 const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Extract table type from URL
   const tableType = location.pathname.split("/").pop();
   const deleteApiUrl = apiEndpoints[tableType];
 
-  // REMOVE THE STRAY CHARACTER "g"
-
   const [data, setData] = useState(initialData);
   const [status, setStatus] = useState(
-    initialData.map((row) => row.status === "Active")
+    initialData.map((row) => row.active_status)
   );
+
+
+  useEffect(() => {
+    console.log("Received initialData:", initialData);
+    setData(initialData);
+    setStatus(initialData.map((row) => row.status === "Active")); // Fix here
+  }, [initialData]);
+
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
-  // Toggle Active Status
   const toggleStatus = (index) => {
-    const updatedStatus = [...status];
-    updatedStatus[index] = !updatedStatus[index];
-    setStatus(updatedStatus);
+    setStatus((prevStatus) => {
+      const updatedStatus = [...prevStatus];
+      updatedStatus[index] = !updatedStatus[index];
+      console.log("Toggled Status:", updatedStatus); // Debugging
+      return updatedStatus;
+    });
   };
 
   // Filter Data Based on Search
@@ -81,11 +87,13 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
     navigate(`${location.pathname}/edit/${row.id}`);
   };
 
-  // Open Delete Confirmation Dialog
   const handleDeleteClick = (row) => {
+    console.log("Selected Row for Deletion:", row);
+    console.log("Deleting ID:", row.id || row._id || row.user_id); // Check which ID exists
     setSelectedRow(row);
     setOpenDeleteDialog(true);
   };
+  
 
   // Handle Confirm Delete API Call
   const handleConfirmDelete = async () => {
@@ -180,12 +188,13 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
                   <Button onClick={() => toggleStatus(rowIndex)}>
                     <img
                       src={status[rowIndex] ? StatusOn : StatusOff}
-                      alt="Status"
+                      alt={status[rowIndex] ? "Active" : "Inactive"}
                       width="40"
                       height="24"
                     />
                   </Button>
                 </TableCell>
+
                 <TableCell align="center">
                   <Box display="flex" justifyContent="center" gap={1}>
                     <Button

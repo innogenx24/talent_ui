@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
+import axios from "axios";
 
 const UsersTable = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/users");
+        console.log("API Response:", response.data); // Check if API data is coming
+  
+        const formattedUsers = response.data.map((user, index) => ({
+          serial: index + 1,
+          id: user.id, 
+          name: `${user.first_name} ${user.last_name}`,
+          email: user.email,
+          role: user.role,
+          status: user.active_status ? "Active" : "Inactive",
+        }));
+  
+        console.log("Formatted Users:", formattedUsers); // Check if data is formatted correctly
+  
+        setUsers(formattedUsers);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+  
+    fetchUsers();
+  }, []);
+  
+
   const columns = [
-    { id: "id", label: "No." },
+    { id: "serial", label: "No." },
     { id: "name", label: "Name" },
     { id: "email", label: "Email" },
     { id: "role", label: "Role" },
-    { id: "status", label: "Status" },
-  ];
-
-  const data = [
-    { id: 1, name: "Ajay Kumar", email: "ajay@example.com", role: "Admin", status: "Active" },
-    { id: 2, name: "Sonia Sharma", email: "sonia@example.com", role: "Recruiter", status: "Inactive" },
   ];
 
   return (
@@ -22,7 +46,7 @@ const UsersTable = () => {
         Users List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={users} />
     </>
   );
 };
