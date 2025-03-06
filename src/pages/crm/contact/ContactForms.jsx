@@ -18,7 +18,7 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
-const ClientForm = () => {
+const ContactForms = () => {
   const [addresses, setAddresses] = useState([{}]);
 
   return (
@@ -127,66 +127,53 @@ const ClientForm = () => {
 
         {/* Other Information */}
         <Grid item xs={12} md={4}>
-        <Paper sx={{ p: 3, borderRadius: 2 }}>
-  <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
-    Other Information:
-  </Typography>
-  <Grid container spacing={2}>
-    <Grid item xs={12} sm={6}>
-      <FormControl fullWidth>
-        <InputLabel>Follow up Person*</InputLabel>
-        <Select label="Follow up Person" defaultValue="">
-          <MenuItem value="">Select</MenuItem>
-        </Select>
-      </FormControl>
-    </Grid>
-    <Grid item xs={12} sm={6}>
-      <FormControl fullWidth>
-        <InputLabel>Source</InputLabel>
-        <Select label="Source" defaultValue="">
-          <MenuItem value="">Select Source</MenuItem>
-        </Select>
-      </FormControl>
-    </Grid>
-    <Grid item xs={12}>
-      <FormControl fullWidth>
-        <InputLabel>Parent Client</InputLabel>
-        <Select label="Parent Client" defaultValue="">
-          <MenuItem value="">Select Parent Client</MenuItem>
-        </Select>
-      </FormControl>
-    </Grid>
-    <Grid item xs={12}>
-      <TextField fullWidth label="Fax" placeholder="Enter Fax" />
-    </Grid>
-    <Grid item xs={12}>
-      <TextField fullWidth label="Website" placeholder="Enter Website Link" />
-    </Grid>
-  </Grid>
-</Paper>
-<Paper sx={{ mt: 2, p: 2, borderRadius: 2 }}>
-  <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
-    Control:
-  </Typography>
-  <Grid container spacing={2} alignItems="center">
-    <Grid item xs={12} display="flex" alignItems="center" gap={1}>
-      <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-        Active Status*
-      </Typography>
-      <Switch defaultChecked />
-    </Grid>
-  </Grid>
-</Paper>   
-     </Grid>
+          <Paper sx={{ p: 3, borderRadius: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
+              Other Information:
+            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel>Source</InputLabel>
+                  <Select label="Source" defaultValue="">
+                    <MenuItem value="">Select Source</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel>Parent Client</InputLabel>
+                  <Select label="Parent Client" defaultValue="">
+                    <MenuItem value="">Select Parent Client</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField fullWidth label="Fax" placeholder="Enter Fax" />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField fullWidth label="Website" placeholder="Enter Website Link" />
+              </Grid>
+            </Grid>
+          </Paper>
+
+          {/* Active Status */}
+          <Paper sx={{ mt: 2, p: 2, display: "flex", alignItems: "center", gap: 1, borderRadius: 2 }}>
+            <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>Active Status*</Typography>
+            <Switch defaultChecked />
+          </Paper>
+        </Grid>
       </Grid>
+
       {/* Save Button */}
       <Grid container justifyContent="center" sx={{ mt: 20 }}>
   <Button variant="contained" size="large" sx={{ px: 30 }}>
     Save
   </Button>
 </Grid>
+
     </Box>
   );
 };
 
-export default ClientForm;
+export default ContactForms;

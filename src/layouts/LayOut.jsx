@@ -96,6 +96,8 @@ const LayOut = () => {
         display: "flex",
         flexDirection: "column",
         height: "100vh",
+        backgroundColor: "#F4F1FA",
+
       }}
     >
       {/* AppBar for navigation */}

@@ -207,7 +207,7 @@ const Sidebar = ({ section }) => {
                 backgroundColor: selected === item.path ? "black" : "white",
                 borderRadius: "14px",
                 padding: "10px",
-                width: "80px",
+                width: "100px",
                 height: "70px",
                 display: "flex",
                 flexDirection: "column",

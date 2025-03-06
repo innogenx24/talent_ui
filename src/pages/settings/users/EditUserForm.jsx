@@ -22,8 +22,8 @@ const EditUserForm = () => {
 
   const [userData, setUserData] = useState({
     joiningDate: "",
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     loginId: "",
     password: "",
     role: "",
@@ -49,8 +49,8 @@ const EditUserForm = () => {
 
         setUserData({
           joiningDate: data.joining_date || "",
-          firstName: data.first_name || "",
-          lastName: data.last_name || "",
+          first_name: data.first_name || "",
+          last_name: data.last_name || "",
           loginId: data.login_id || "",
           password: "", // Hide hashed password for security
           role: data.role || "",
@@ -114,8 +114,10 @@ const EditUserForm = () => {
               <Box sx={{ flex: 1, minWidth: { xs: "100%", md: "48%" }, display: "flex", flexDirection: "column", gap: 2 }}>
                 <TextField fullWidth label="User ID*" value={id} disabled />
                 <TextField fullWidth label="Joining Date*" type="date" name="joiningDate" value={userData.joiningDate} onChange={handleChange} />
-                <TextField fullWidth label="First Name*" name="firstName" value={userData.firstName} onChange={handleChange} />
-                <TextField fullWidth label="Last Name*" name="lastName" value={userData.lastName} onChange={handleChange} />
+                <TextField fullWidth label="First Name*" name="first_name" value={userData.first_name} onChange={handleChange} />
+<TextField fullWidth label="Last Name*" name="last_name" value={userData.last_name} onChange={handleChange} />
+
+
                 <TextField fullWidth label="Login ID*" name="loginId" value={userData.loginId} onChange={handleChange} />
               </Box>
               <Box sx={{ flex: 1, minWidth: { xs: "100%", md: "48%" }, display: "flex", flexDirection: "column", gap: 2 }}>

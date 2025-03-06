@@ -16,7 +16,6 @@ import InterviewTable from "../pages/interview/InterviewTable";
 import CandidateTable from "../pages/candidate/CandidateTable";
 import SettingsTable from "../pages/settings/SettingsTable";
 import VendorTable from "../pages/vendor/VendorTable";
-import CRMTable from "../pages/crm/CRMTable";
 import OperationsTable from "../pages/operations/OperationsTable";
 import DepartmentTable from "../pages/settings/department/DepartmentTable.jsx";
 import ExperienceRangeTable from "../pages/settings/experiance/ExperienceRangeTable.jsx";
@@ -53,7 +52,10 @@ import AddInvoiceForm from "../pages/operations/invoice/AddInvoiceForm.jsx";
 import InvoiceTable from "../pages/operations/invoice/InvoiceTable.jsx";
 import EditInvoiceForm from "../pages/operations/invoice/EditInvoiceForm.jsx";
 import ClientForm from "../pages/crm/client/ClientForm.jsx";
-
+import ContactForms from "../pages/crm/contact/ContactForms.jsx";
+import CRMTable from "../pages/crm/client/CRMTable.jsx";
+import { QuotationsForm } from "../pages/crm/Quotations/QuotationsForm.jsx";
+import { OrdersForms } from "../pages/crm/Orders/OrdersForms.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -81,8 +83,11 @@ const RoutesConfig = () => {
             <Route path="crm" element={<CRMTable />} />
             <Route path="crm/add" element={<ClientForm />} />
             <Route path="crm/quotations" element={<QuotationTable />} />
+            <Route path="crm/quotations/add" element={<QuotationsForm/>} />
             <Route path="crm/orders" element={<OrdersTable />} />
-            <Route path="crm/contacts" element={<ContactTable />} />
+            <Route path="crm/orders/add" element={<OrdersForms />} />
+            <Route path="crm/contacts" element={<ContactTable />}/>
+            <Route path="crm/contacts/add" element={<ContactForms/>} />
 
             <Route path="operations" element={<AccountTable />} />
             <Route path="operations/add" element={<AddAccountForm />} />
