@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
 import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ const UsersTable = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users");
+        const response = await axios.get(`${API_URL}/users`);
         console.log("API Response:", response.data); // Check if API data is coming
   
         const formattedUsers = response.data.map((user, index) => ({

@@ -14,6 +14,7 @@ import {
   Switch,
 } from "@mui/material";
 import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const EditUserForm = () => {
   const { id } = useParams();
@@ -44,7 +45,7 @@ const EditUserForm = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/${id}`);
+        const response = await axios.get(`${API_URL}/users/${id}`);
         const data = response.data;
 
         setUserData({
@@ -88,7 +89,7 @@ const EditUserForm = () => {
       const updatedUser = { ...userData };
       
 
-      const response = await axios.put(`http://localhost:5000/api/users/${id}`, updatedUser);
+      const response = await axios.put(`${API_URL}/users/${id}`, updatedUser);
 
       if (response.status === 200) {
         navigate(`/dashboard/settings`);

@@ -15,6 +15,7 @@ import {
   Switch,
 } from "@mui/material";
 import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const AddUserForm = () => {
   const [role, setRole] = useState("");
@@ -56,7 +57,7 @@ const AddUserForm = () => {
     };
   
     try {
-      const response = await axios.post("http://localhost:5000/api/users/create", userData);
+      const response = await axios.post(`${API_URL}/users/create`, userData);
       if (response.status === 201) {
         navigate(`/dashboard/settings`);
       }

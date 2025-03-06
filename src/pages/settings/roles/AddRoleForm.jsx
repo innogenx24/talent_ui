@@ -12,12 +12,52 @@ import {
   InputLabel,
   Switch,
 } from "@mui/material";
+import axios from "axios";
+import {useNavigate } from "react-router-dom";
+import API_URL from "../../../api/Api_url";
 
 const AddRoleForm = () => {
   const [roleName, setRoleName] = useState("");
   const [department, setDepartment] = useState("");
   const [description, setDescription] = useState("");
   const [activeStatus, setActiveStatus] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSaveRole = async () => {
+    if (!roleName || !department) {
+      alert("Role Name and Department are required.");
+      return;
+    }
+
+    setLoading(true);
+
+    const roleData = {
+      tenant_id: 1, // Static value
+      name: roleName,
+      department,
+      description,
+      active_status: activeStatus,
+    };
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/roles/create`,
+        roleData
+      );
+     
+      setRoleName("");
+      setDepartment("");
+      setDescription("");
+      setActiveStatus(true);
+      navigate(`/dashboard/settings/roles`);
+    } catch (error) {
+      console.error("Error creating role:", error);
+      alert("Failed to create role. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Box
@@ -106,9 +146,10 @@ const AddRoleForm = () => {
           color="primary"
           size="large"
           sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }}
+          onClick={handleSaveRole}
+          disabled={loading}
         >
-          {" "}
-          Save Role
+          {loading ? "Saving..." : "Save Role"}
         </Button>
       </Box>
     </Box>
