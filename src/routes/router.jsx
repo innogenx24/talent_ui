@@ -28,7 +28,6 @@ import OnBoardingTable from "../pages/candidate/OnBoardingTable";
 import BenchTable from "../pages/candidate/BenchTable";
 import ResumeBankTable from "../pages/candidate/ResumeBankTable";
 import ProfilePage from "../pages/user-profile/ProfilePage";
-import ContactTable from "../pages/crm/ContactTable";
 import OrdersTable from "../pages/crm/OrdersTable";
 import QuotationTable from "../pages/crm/QuotationTable";
 import AddInterview from "../pages/interview/AddInterview";
@@ -56,6 +55,11 @@ import ContactForms from "../pages/crm/contact/ContactForms.jsx";
 import CRMTable from "../pages/crm/client/CRMTable.jsx";
 import { QuotationsForm } from "../pages/crm/Quotations/QuotationsForm.jsx";
 import { OrdersForms } from "../pages/crm/Orders/OrdersForms.jsx";
+import ClientFormEdit from "../pages/crm/client/ClientFormEdit.jsx";
+import ContactTable from "../pages/crm/contact/ContactTable.jsx";
+import { QuotationsFormEdit } from "../pages/crm/Quotations/QuotationsFormEdit.jsx";
+import OrdersFormsEdit from "../pages/crm/Orders/OrdersFormsEdit.jsx";
+import { ContactFormsEdit } from "../pages/crm/contact/ContactFormsEdit.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -82,12 +86,16 @@ const RoutesConfig = () => {
             <Route path="candidate" element={<CandidateTable />} />
             <Route path="crm" element={<CRMTable />} />
             <Route path="crm/add" element={<ClientForm />} />
+            <Route path="crm/edit/:id" element={<ClientFormEdit/>} />
             <Route path="crm/quotations" element={<QuotationTable />} />
-            <Route path="crm/quotations/add" element={<QuotationsForm/>} />
+            <Route path="crm/quotations/add" element={<QuotationsForm/>}/>
+            <Route path="crm/quotations/edit/:id" element={<QuotationsFormEdit/>}/>
             <Route path="crm/orders" element={<OrdersTable />} />
             <Route path="crm/orders/add" element={<OrdersForms />} />
+            <Route path="crm/orders/edit/:id" element={<OrdersFormsEdit />} />
             <Route path="crm/contacts" element={<ContactTable />}/>
             <Route path="crm/contacts/add" element={<ContactForms/>} />
+            <Route path="crm/contacts/edit/:id" element={<ContactFormsEdit/>} />
 
             <Route path="operations" element={<AccountTable />} />
             <Route path="operations/add" element={<AddAccountForm />} />

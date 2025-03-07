@@ -17,6 +17,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Typography,
 } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -26,29 +27,33 @@ import EditIcon from "../../assets/logos/edit.png";
 import StatusOff from "../../assets/logos/turnoff.png";
 import StatusOn from "../../assets/logos/turnon.png";
 import API_URL from "../../api/Api_url";
+
 // API Endpoints Mapping
 const apiEndpoints = {
   settings: `${API_URL}/users`,
-  roles: `${API_URL}/roles/delete`,
+  roles: `${API_URL}/roles`,
   department: `${API_URL}/departments/delete`,
 };
 
-const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
+const DynamicTable = ({ columns, data: initialData = [], rowsPerPage = 10 }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const tableType = location.pathname.split("/").pop();
   const deleteApiUrl = apiEndpoints[tableType];
 
-  const [data, setData] = useState(initialData);
-  const [status, setStatus] = useState(
-    initialData.map((row) => row.active_status)
-  );
-
+  const [data, setData] = useState([]);
+  const [status, setStatus] = useState([]);
 
   useEffect(() => {
     console.log("Received initialData:", initialData);
-    setData(initialData);
-    setStatus(initialData.map((row) => row.status === "Active")); // Fix here
+
+    if (Array.isArray(initialData) && initialData.length > 0) {
+      setData(initialData);
+      setStatus(initialData.map((row) => row.status === "Active"));
+    } else {
+      setData([]);
+      setStatus([]);
+    }
   }, [initialData]);
 
   const [page, setPage] = useState(1);
@@ -60,7 +65,7 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
     setStatus((prevStatus) => {
       const updatedStatus = [...prevStatus];
       updatedStatus[index] = !updatedStatus[index];
-      console.log("Toggled Status:", updatedStatus); // Debugging
+      console.log("Toggled Status:", updatedStatus);
       return updatedStatus;
     });
   };
@@ -68,18 +73,12 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
   // Filter Data Based on Search
   const filteredData = data.filter((row) =>
     columns.some((column) =>
-      row[column.id]
-        ?.toString()
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+      row[column.id]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
   // Pagination Logic
-  const paginatedData = filteredData.slice(
-    (page - 1) * rowsPerPage,
-    page * rowsPerPage
-  );
+  const paginatedData = filteredData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
 
   // Navigate to Edit Page
@@ -89,11 +88,9 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
 
   const handleDeleteClick = (row) => {
     console.log("Selected Row for Deletion:", row);
-    console.log("Deleting ID:", row.id || row._id || row.user_id); // Check which ID exists
     setSelectedRow(row);
     setOpenDeleteDialog(true);
   };
-  
 
   // Handle Confirm Delete API Call
   const handleConfirmDelete = async () => {
@@ -108,9 +105,7 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
 
         if (response.ok) {
           console.log(`Deleted ID: ${selectedRow.id} from ${tableType}`);
-          setData((prevData) =>
-            prevData.filter((row) => row.id !== selectedRow.id)
-          );
+          setData((prevData) => prevData.filter((row) => row.id !== selectedRow.id));
         } else {
           console.error("Failed to delete:", await response.text());
         }
@@ -124,24 +119,14 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
   return (
     <Box>
       {/* Search and Add Button */}
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        alignItems="center"
-        gap={2}
-        mb={2}
-      >
+      <Box display="flex" justifyContent="flex-end" alignItems="center" gap={2} mb={2}>
         <TextField
           label="Search"
           variant="outlined"
           size="small"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => navigate(`${location.pathname}/add`)}
-        >
+        <Button variant="contained" color="primary" onClick={() => navigate(`${location.pathname}/add`)}>
           {tableType === "settings"
             ? "Add User"
             : tableType === "crm"
@@ -160,11 +145,7 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
           <TableHead>
             <TableRow>
               {columns.map((column, index) => (
-                <TableCell
-                  key={index}
-                  align="center"
-                  sx={{ whiteSpace: "nowrap", fontWeight: "bold" }}
-                >
+                <TableCell key={index} align="center" sx={{ whiteSpace: "nowrap", fontWeight: "bold" }}>
                   {column.label}
                 </TableCell>
               ))}
@@ -177,52 +158,43 @@ const DynamicTable = ({ columns, data: initialData, rowsPerPage = 10 }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((row, rowIndex) => (
-              <TableRow key={row.id}>
-                {columns.map((column, colIndex) => (
-                  <TableCell key={colIndex} align="center">
-                    {row[column.id]}
+            {paginatedData.length > 0 ? (
+              paginatedData.map((row, rowIndex) => (
+                <TableRow key={row.id}>
+                  {columns.map((column, colIndex) => (
+                    <TableCell key={colIndex} align="center">
+                      {row[column.id] || "N/A"}
+                    </TableCell>
+                  ))}
+                  <TableCell align="center">
+                    <Button onClick={() => toggleStatus(rowIndex)}>
+                      <img src={status[rowIndex] ? StatusOn : StatusOff} alt={status[rowIndex] ? "Active" : "Inactive"} width="40" height="24" />
+                    </Button>
                   </TableCell>
-                ))}
-                <TableCell align="center">
-                  <Button onClick={() => toggleStatus(rowIndex)}>
-                    <img
-                      src={status[rowIndex] ? StatusOn : StatusOff}
-                      alt={status[rowIndex] ? "Active" : "Inactive"}
-                      width="40"
-                      height="24"
-                    />
-                  </Button>
-                </TableCell>
-
-                <TableCell align="center">
-                  <Box display="flex" justifyContent="center" gap={1}>
-                    <Button
-                      onClick={() => handleEdit(row)}
-                      sx={{ minWidth: "30px", p: 0 }}
-                    >
-                      <img src={EditIcon} alt="Edit" width="45" height="35" />
-                    </Button>
-                    <Button
-                      onClick={() => handleDeleteClick(row)}
-                      sx={{ minWidth: "30px", p: 0 }}
-                    >
-                      <img
-                        src={DeleteIcon}
-                        alt="Delete"
-                        width="45"
-                        height="35"
-                      />
-                    </Button>
-                  </Box>
+                  <TableCell align="center">
+                    <Box display="flex" justifyContent="center" gap={1}>
+                      <Button onClick={() => handleEdit(row)} sx={{ minWidth: "30px", p: 0 }}>
+                        <img src={EditIcon} alt="Edit" width="45" height="35" />
+                      </Button>
+                      <Button onClick={() => handleDeleteClick(row)} sx={{ minWidth: "30px", p: 0 }}>
+                        <img src={DeleteIcon} alt="Delete" width="45" height="35" />
+                      </Button>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={columns.length + 2} align="center">
+                  <Typography>No data available</Typography>
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
 
-      {/* Pagination */}
+     {/* Pagination */}
       <Stack
         spacing={2}
         direction="row"

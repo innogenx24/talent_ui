@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
 import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const UsersTable = () => {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ const UsersTable = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users");
+        const response = await axios.get(`${API_URL}/users`);
         console.log("API Response:", response.data); // Check if API data is coming
   
         const formattedUsers = response.data.map((user, index) => ({
@@ -18,6 +19,9 @@ const UsersTable = () => {
           name: `${user.first_name} ${user.last_name}`,
           email: user.email,
           role: user.role,
+          department:user.department,
+          joining_date:user.joining_date,
+          phone_number:user.phone_number,
           status: user.active_status ? "Active" : "Inactive",
         }));
   
@@ -35,9 +39,13 @@ const UsersTable = () => {
 
   const columns = [
     { id: "serial", label: "No." },
-    { id: "name", label: "Name" },
-    { id: "email", label: "Email" },
+    { id: "name", label: "Full Name" },
     { id: "role", label: "Role" },
+    { id: "department", label: "Department" },
+    { id: "email", label: "Email" },
+    { id: "phone_number", label: "Phone Number" },
+    { id: "joining_date", label: "Joining Date" },
+
   ];
 
   return (

@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
+import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const RolesTable = () => {
-  const columns = [
-    { id: "id", label: "No." },
-    { id: "role_name", label: "Role Name" },
-    { id: "permissions", label: "Permissions" },
-    { id: "status", label: "Status" },
-  ];
+  const [roles, setRoles] = useState([]);
 
-  const data = [
-    { id: 1, role_name: "Admin", permissions: "Full Access", status: "Active" },
-    { id: 2, role_name: "Recruiter", permissions: "Limited Access", status: "Active" },
-    { id: 3, role_name: "Manager", permissions: "View & Edit", status: "Inactive" },
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/roles`);
+        console.log("API Response:", response.data); // Debugging API response
+
+        const formattedRoles = response.data.map((role, index) => ({
+          serial: index + 1,
+          id: role.id,
+          role_name: role.name,
+          department: role.department,
+          description: role.description || "N/A", // Assuming description exist in API
+          status: role.active_status ? "Active" : "Inactive",
+        }));
+
+        console.log("Formatted Roles:", formattedRoles); // Debugging formatted data
+
+        setRoles(formattedRoles);
+      } catch (error) {
+        console.error("Error fetching roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
+  const columns = [
+    { id: "serial", label: "No." },
+    { id: "role_name", label: "Role Name" },
+    { id: "department", label: "Department" },
+    { id: "description", label: "description" },
   ];
 
   return (
@@ -22,7 +46,7 @@ const RolesTable = () => {
         Roles List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={roles} />
     </>
   );
 };
