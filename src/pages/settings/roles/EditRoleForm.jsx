@@ -27,6 +27,7 @@ const EditRoleForm = () => {
     active_status: false,
   });
 
+  const [departments, setDepartments] = useState([]); // State for department list
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -45,7 +46,18 @@ const EditRoleForm = () => {
         console.error("Error fetching role data:", error);
       }
     };
+
+    const fetchDepartments = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/department`);
+        setDepartments(response.data);
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+
     fetchRole();
+    fetchDepartments();
   }, [id]);
 
   const handleChange = (e) => {
@@ -72,26 +84,10 @@ const EditRoleForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        padding: "20px",
-        minHeight: "100vh",
-        width: { xs: "100%", md: "80%" },
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: { xs: "column", md: "row" },
-          gap: 3,
-          justifyContent: "center",
-        }}
-      >
+    <Box sx={{ padding: "20px", minHeight: "100vh", width: { xs: "100%", md: "80%" } }}>
+      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 3, justifyContent: "center" }}>
         {/* Left Section - Edit Role */}
-        <Card
-          elevation={0}
-          sx={{ flex: 1, minWidth: { xs: "100%", md: "50%" }, p: 2 }}
-        >
+        <Card elevation={0} sx={{ flex: 1, minWidth: { xs: "100%", md: "50%" }, p: 2 }}>
           <CardContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Typography variant="h6" gutterBottom>
               Edit Role:
@@ -109,14 +105,12 @@ const EditRoleForm = () => {
 
               <FormControl fullWidth>
                 <InputLabel>Department*</InputLabel>
-                <Select
-                  name="department"
-                  value={roleData.department}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="HR">HR</MenuItem>
-                  <MenuItem value="IT">IT</MenuItem>
-                  <MenuItem value="Finance">Finance</MenuItem>
+                <Select name="department" value={roleData.department} onChange={handleChange}>
+                  {departments.map((dept) => (
+                    <MenuItem key={dept.id} value={dept.department_name}>
+                      {dept.department_name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>
@@ -140,11 +134,7 @@ const EditRoleForm = () => {
             <Typography variant="h6">Control:</Typography>
             <Box display="flex" alignItems="center" gap={2}>
               <Typography>Active Status*</Typography>
-              <Switch
-                checked={roleData.active_status}
-                onChange={handleSwitchChange}
-                color="success"
-              />
+              <Switch checked={roleData.active_status} onChange={handleSwitchChange} color="success" />
             </Box>
           </CardContent>
         </Card>
@@ -152,13 +142,7 @@ const EditRoleForm = () => {
 
       {/* Update Button */}
       <Box display="flex" justifyContent="center" mt={3}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }}
-          onClick={handleSave}
-        >
+        <Button variant="contained" color="primary" size="large" sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }} onClick={handleSave}>
           Update Role
         </Button>
       </Box>

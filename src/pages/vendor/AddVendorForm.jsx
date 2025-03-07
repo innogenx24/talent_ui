@@ -55,40 +55,59 @@ const AddVendorForm = () => {
                 disabled
               />
 
-              <FormControl fullWidth>
-                <InputLabel>Select Vendor Name</InputLabel>
-                <Select
-                  value={vendorName}
-                  onChange={(e) => setVendorName(e.target.value)}
-                >
-                  <MenuItem value="">Select Vendor Name</MenuItem>
-                  {vendorNames.map((name, index) => (
-                    <MenuItem key={index} value={name}>
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <Grid container spacing={2}>
+                {/* Left Side Fields (3 Fields) */}
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select Vendor Name</InputLabel>
+                    <Select
+                      value={vendorName}
+                      onChange={(e) => setVendorName(e.target.value)}
+                    >
+                      <MenuItem value="">Select Vendor Name</MenuItem>
+                      {vendorNames.map((name, index) => (
+                        <MenuItem key={index} value={name}>
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <FormControl fullWidth>
-                <InputLabel>Select Vendor Owner</InputLabel>
-                <Select
-                  value={vendorOwner}
-                  onChange={(e) => setVendorOwner(e.target.value)}
-                >
-                  <MenuItem value="">Select Vendor Owner</MenuItem>
-                  {vendorOwners.map((owner, index) => (
-                    <MenuItem key={index} value={owner}>
-                      {owner}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select Vendor Owner</InputLabel>
+                    <Select
+                      value={vendorOwner}
+                      onChange={(e) => setVendorOwner(e.target.value)}
+                    >
+                      <MenuItem value="">Select Vendor Owner</MenuItem>
+                      {vendorOwners.map((owner, index) => (
+                        <MenuItem key={index} value={owner}>
+                          {owner}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <TextField fullWidth label="Contact Name" />
-              <TextField fullWidth label="Website" />
-              <TextField fullWidth label="Phone Number" />
-              <TextField fullWidth label="Email" />
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Contact Name" />
+                </Grid>
+
+                {/* Right Side Fields (3 Fields) */}
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Website" />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Phone Number" />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Email" />
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>
@@ -104,49 +123,64 @@ const AddVendorForm = () => {
               </Typography>
               <TextField fullWidth label="Address Line 1" />
 
-              <FormControl fullWidth>
-                <InputLabel>Select Country</InputLabel>
-                <Select
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                >
-                  <MenuItem value="">Select Country</MenuItem>
-                  {countries.map((c, index) => (
-                    <MenuItem key={index} value={c}>
-                      {c}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <Grid container spacing={2}>
 
-              <FormControl fullWidth>
-                <InputLabel>Select State</InputLabel>
-                <Select
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                >
-                  <MenuItem value="">Select State</MenuItem>
-                  {states.map((s, index) => (
-                    <MenuItem key={index} value={s}>
-                      {s}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <Grid item xs={12} md={6}>
+                  <TextField fullWidth label="Pin Code" />
+                </Grid>
+                
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select Country</InputLabel>
+                    <Select
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                    >
+                      <MenuItem value="">Select Country</MenuItem>
+                      {countries.map((c, index) => (
+                        <MenuItem key={index} value={c}>
+                          {c}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <FormControl fullWidth>
-                <InputLabel>Select City</InputLabel>
-                <Select value={city} onChange={(e) => setCity(e.target.value)}>
-                  <MenuItem value="">Select City</MenuItem>
-                  {cities.map((c, index) => (
-                    <MenuItem key={index} value={c}>
-                      {c}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select State</InputLabel>
+                    <Select
+                      value={state}
+                      onChange={(e) => setState(e.target.value)}
+                    >
+                      <MenuItem value="">Select State</MenuItem>
+                      {states.map((s, index) => (
+                        <MenuItem key={index} value={s}>
+                          {s}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <TextField fullWidth label="Pin Code" />
+                {/* Right Side Fields (2 Fields) */}
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth>
+                    <InputLabel>Select City</InputLabel>
+                    <Select
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    >
+                      <MenuItem value="">Select City</MenuItem>
+                      {cities.map((c, index) => (
+                        <MenuItem key={index} value={c}>
+                          {c}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
             </CardContent>
           </Card>
         </Grid>

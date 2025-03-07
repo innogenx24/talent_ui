@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
+import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const BranchesTable = () => {
-  const columns = [
-    { id: "id", label: "No." },
-    { id: "branch_name", label: "Branch Name" },
-    { id: "location", label: "Location" },
-  ];
+  const [branches, setBranches] = useState([]);
 
-  const data = [
-    { id: 1, branch_name: "New York Branch", location: "New York" },
-    { id: 2, branch_name: "San Francisco Branch", location: "San Francisco" },
-    { id: 3, branch_name: "Los Angeles Branch", location: "Los Angeles" },
-    { id: 4, branch_name: "Chicago Branch", location: "Chicago" },
-    { id: 5, branch_name: "Seattle Branch", location: "Seattle" },
+  useEffect(() => {
+    const fetchBranches = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/branch`);
+        console.log("API Response:", response.data); // Debugging API response
+
+        const formattedBranches = response.data.map((branch, index) => ({
+          serial: index + 1,
+          id: branch.id,
+          branch_name: branch.branch_name,
+          address_details: `${branch.address}, ${branch.city}, ${branch.state}, ${branch.country} - ${branch.pincode}`,
+          status: branch.active_status ? "Active" : "Inactive",
+        }));
+
+        console.log("Formatted Branches:", formattedBranches); // Debugging formatted data
+
+        setBranches(formattedBranches);
+      } catch (error) {
+        console.error("Error fetching branches:", error);
+      }
+    };
+
+    fetchBranches();
+  }, []);
+
+  const columns = [
+    { id: "serial", label: "No." },
+    { id: "branch_name", label: "Branch Name" },
+    { id: "address_details", label: "Address" },
   ];
 
   return (
@@ -23,7 +44,7 @@ const BranchesTable = () => {
         Branches List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={branches} />
     </>
   );
 };

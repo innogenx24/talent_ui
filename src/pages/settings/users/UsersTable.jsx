@@ -19,6 +19,9 @@ const UsersTable = () => {
           name: `${user.first_name} ${user.last_name}`,
           email: user.email,
           role: user.role,
+          department:user.department,
+          joining_date:user.joining_date,
+          phone_number:user.phone_number,
           status: user.active_status ? "Active" : "Inactive",
         }));
   
@@ -36,9 +39,13 @@ const UsersTable = () => {
 
   const columns = [
     { id: "serial", label: "No." },
-    { id: "name", label: "Name" },
-    { id: "email", label: "Email" },
+    { id: "name", label: "Full Name" },
     { id: "role", label: "Role" },
+    { id: "department", label: "Department" },
+    { id: "email", label: "Email" },
+    { id: "phone_number", label: "Phone Number" },
+    { id: "joining_date", label: "Joining Date" },
+
   ];
 
   return (

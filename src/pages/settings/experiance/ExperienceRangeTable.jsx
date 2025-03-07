@@ -1,22 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
+import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const ExperienceRangeTable = () => {
+  const [experienceRanges, setExperienceRanges] = useState([]);
+
+  useEffect(() => {
+    const fetchExperienceRanges = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/experience-range`);
+        console.log("API Response:", response.data); 
+
+        const formattedData = response.data.map((item, index) => ({
+          serial: index + 1,
+          id: item.id,
+          experience_range: item.experience_range,
+          description: item.description || "N/A", 
+          status: item.active_status ? "Active" : "Inactive",
+        }));
+
+        setExperienceRanges(formattedData);
+      } catch (error) {
+        console.error("Error fetching experience ranges:", error);
+      }
+    };
+
+    fetchExperienceRanges();
+  }, []);
+
   const columns = [
-    { id: "id", label: "No." },
-    { id: "min_experience", label: "Experience Range (Years)" },
+    { id: "serial", label: "No." },
+    { id: "experience_range", label: "Experience Range" },
     { id: "description", label: "Description" },
   ];
-  
-  const data = [
-    { id: 1, min_experience: "0", description: "Entry-level, no experience required" },
-    { id: 2, min_experience: "1", description: "Junior level, basic industry experience" },
-    { id: 3, min_experience: "3", description: "Mid-level, hands-on experience required" },
-    { id: 4, min_experience: "5", description: "Senior level, advanced expertise" },
-    { id: 5, min_experience: "10", description: "Expert level, leadership and strategy" },
-  ];
-  
 
   return (
     <>
@@ -24,7 +42,7 @@ const ExperienceRangeTable = () => {
         Experience Range List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={experienceRanges} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   TextField,
@@ -7,33 +7,76 @@ import {
   CardContent,
   Typography,
   Switch,
-  MenuItem,
-  Select,
   Grid,
 } from "@mui/material";
+import axios from "axios";
+import API_URL from "../../../api/Api_url";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditBranchForm = () => {
-  // Dummy data for existing branch
-  const [branchId, setBranchId] = useState("BR-1023");
-  const [branchName, setBranchName] = useState("Main Office");
-  const [pincode, setPincode] = useState("560001");
-  const [country, setCountry] = useState("India");
-  const [state, setState] = useState("Karnataka");
-  const [city, setCity] = useState("Bangalore");
-  const [address, setAddress] = useState("123, MG Road, Bangalore");
+  const { id } = useParams();
+  const [branchName, setBranchName] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
   const [activeStatus, setActiveStatus] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(""); // Store the error message
+  const navigate = useNavigate();
 
-  const handleUpdateBranch = () => {
-    console.log({
-      branchId,
-      branchName,
+  useEffect(() => {
+    const fetchBranchDetails = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/branch/${id}`);
+        const data = response.data;
+        setBranchName(data.branch_name);
+        setPincode(data.pincode);
+        setCountry(data.country);
+        setState(data.state);
+        setCity(data.city);
+        setAddress(data.address);
+        setActiveStatus(data.active_status);
+      } catch (error) {
+        console.error("Error fetching branch details:", error);
+      }
+    };
+
+    fetchBranchDetails();
+  }, [id]);
+
+  const handleUpdateBranch = async () => {
+    if (!branchName || !pincode || !country || !state || !city || !address) {
+      setErrorMessage("Please fill all required fields!");
+      return;
+    }
+
+    const branchData = {
+      branch_name: branchName,
       pincode,
       country,
       state,
       city,
       address,
-      activeStatus,
-    });
+      active_status: activeStatus,
+    };
+
+    try {
+      setErrorMessage(""); // Clear any previous errors
+
+      const response = await axios.put(`${API_URL}/branch/${id}`, branchData);
+      if (response.status === 200) {
+        navigate(`/dashboard/settings/branch`);
+      }
+    } catch (error) {
+      console.error("Error updating branch:", error);
+
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.message); // Set error message under input
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -47,13 +90,14 @@ const EditBranchForm = () => {
               Branch Details:
             </Typography>
 
-            <TextField fullWidth label="Branch ID*" value={branchId} disabled />
             <TextField
               fullWidth
               label="Branch Name*"
               placeholder="Enter Branch Name"
               value={branchName}
               onChange={(e) => setBranchName(e.target.value)}
+              error={Boolean(errorMessage)} // Apply red border if error exists
+              helperText={errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>} // Show error in red
             />
           </CardContent>
         </Card>
@@ -67,46 +111,23 @@ const EditBranchForm = () => {
 
             <Grid container spacing={2}>
               <Grid item xs={12} md={6}>
-                <TextField
-                  fullWidth
-                  label="Pincode*"
-                  placeholder="Enter Pincode"
-                  value={pincode}
-                  onChange={(e) => setPincode(e.target.value)}
-                />
+                <TextField fullWidth label="Pincode*" placeholder="Enter Pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} />
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Select fullWidth value={country} onChange={(e) => setCountry(e.target.value)}>
-                  <MenuItem value="India">India</MenuItem>
-                  <MenuItem value="USA">USA</MenuItem>
-                </Select>
+                <TextField fullWidth label="Country*" value={country} disabled />
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Select fullWidth value={state} onChange={(e) => setState(e.target.value)}>
-                  <MenuItem value="Karnataka">Karnataka</MenuItem>
-                  <MenuItem value="Maharashtra">Maharashtra</MenuItem>
-                </Select>
+                <TextField fullWidth label="State*" value={state} disabled />
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Select fullWidth value={city} onChange={(e) => setCity(e.target.value)}>
-                  <MenuItem value="Bangalore">Bangalore</MenuItem>
-                  <MenuItem value="Mumbai">Mumbai</MenuItem>
-                </Select>
+                <TextField fullWidth label="District*" value={city} disabled />
               </Grid>
 
               <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  multiline
-                  rows={2}
-                  label="Address*"
-                  placeholder="Enter Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
+                <TextField fullWidth multiline rows={2} label="Address*" placeholder="Enter Address" value={address} onChange={(e) => setAddress(e.target.value)} />
               </Grid>
             </Grid>
           </CardContent>
@@ -118,11 +139,7 @@ const EditBranchForm = () => {
             <Typography variant="h6">Control:</Typography>
             <Box display="flex" alignItems="center" gap={2}>
               <Typography>Active Status*</Typography>
-              <Switch
-                checked={activeStatus}
-                onChange={(e) => setActiveStatus(e.target.checked)}
-                color="success"
-              />
+              <Switch checked={activeStatus} onChange={(e) => setActiveStatus(e.target.checked)} color="success" />
             </Box>
           </CardContent>
         </Card>
@@ -130,13 +147,7 @@ const EditBranchForm = () => {
 
       {/* Update Button */}
       <Box display="flex" justifyContent="center" mt={3}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }}
-          onClick={handleUpdateBranch}
-        >
+        <Button variant="contained" color="primary" size="large" sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }} onClick={handleUpdateBranch}>
           Update Branch
         </Button>
       </Box>

@@ -17,6 +17,7 @@ const RolesTable = () => {
           serial: index + 1,
           id: role.id,
           role_name: role.name,
+          department: role.department,
           description: role.description || "N/A", // Assuming description exist in API
           status: role.active_status ? "Active" : "Inactive",
         }));
@@ -35,8 +36,8 @@ const RolesTable = () => {
   const columns = [
     { id: "serial", label: "No." },
     { id: "role_name", label: "Role Name" },
+    { id: "department", label: "Department" },
     { id: "description", label: "description" },
-    { id: "status", label: "Status" },
   ];
 
   return (
