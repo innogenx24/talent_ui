@@ -59,7 +59,7 @@ import ClientFormEdit from "../pages/crm/client/ClientFormEdit.jsx";
 import ContactTable from "../pages/crm/contact/ContactTable.jsx";
 import { QuotationsFormEdit } from "../pages/crm/Quotations/QuotationsFormEdit.jsx";
 import OrdersFormsEdit from "../pages/crm/Orders/OrdersFormsEdit.jsx";
-import { ContactFormsEdit } from "../pages/crm/contact/ContactFormsEdit.jsx";
+import ContactFormsEdit from "../pages/crm/contact/ContactFormsEdit.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
