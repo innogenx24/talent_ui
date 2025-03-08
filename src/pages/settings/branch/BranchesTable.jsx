@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
 import axios from "axios";
 import API_URL from "../../../api/Api_url";
+const token = localStorage.getItem("token");
 
 const BranchesTable = () => {
   const [branches, setBranches] = useState([]);
@@ -11,7 +12,6 @@ const BranchesTable = () => {
     const fetchBranches = async () => {
       try {
 
-        const token = localStorage.getItem("token");
 
         const response = await axios.get(`${API_URL}/branch`, {
           headers: {
@@ -43,6 +43,8 @@ const BranchesTable = () => {
     { id: "address_details", label: "Address" },
   ];
 
+  console.log(token,"kkkkkkkkkkkkkkkkkkkkk");
+  
   return (
     <>
       <Typography variant="h6" sx={{ color: "#989FA9", mb: 2 }}>

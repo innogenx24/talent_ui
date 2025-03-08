@@ -6,11 +6,11 @@ import API_URL from "../../../api/Api_url";
 
 const AccountTable = () => {
   const [accountDetails, setAccountDetails] = useState([]);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchAccountDetails = async () => {
       try {
-        const token = localStorage.getItem("token");
 
         const response = await axios.get(`${API_URL}/account-details`, {
           headers: {
@@ -49,7 +49,7 @@ const AccountTable = () => {
 
     fetchAccountDetails();
   }, []);
-
+  
   const columns = [
     { id: "serial", label: "No." },
     { id: "candidate_name", label: "Candidate Name" },

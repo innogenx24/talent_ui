@@ -19,7 +19,6 @@ import VendorTable from "../pages/vendor/VendorTable";
 import OperationsTable from "../pages/operations/OperationsTable";
 import DepartmentTable from "../pages/settings/department/DepartmentTable.jsx";
 import ExperienceRangeTable from "../pages/settings/experiance/ExperienceRangeTable.jsx";
-import RolesTable from "../pages/settings/roles/RolesTable.jsx";
 import UsersTable from "../pages/settings/users/UsersTable.jsx";
 import AccountTable from "../pages/operations/accounts/AccountTable.jsx";
 import OffBoardedTable from "../pages/candidate/OffBoardedTable";
@@ -60,6 +59,7 @@ import ContactTable from "../pages/crm/contact/ContactTable.jsx";
 import { QuotationsFormEdit } from "../pages/crm/Quotations/QuotationsFormEdit.jsx";
 import OrdersFormsEdit from "../pages/crm/Orders/OrdersFormsEdit.jsx";
 import ContactFormsEdit from "../pages/crm/contact/ContactFormsEdit.jsx";
+import RolesTable from "../pages/settings/roles/RolesTable.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
