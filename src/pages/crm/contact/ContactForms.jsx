@@ -26,7 +26,7 @@ const ContactForms = () => {
       <Grid container spacing={3}>
         {/* Client Details */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 2 }}>
+          <Paper sx={{ p: 3, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Client Details:
             </Typography>
@@ -76,7 +76,7 @@ const ContactForms = () => {
 
         {/* Address Section */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 2 }}>
+          <Paper sx={{ p: 3, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Address:
             </Typography>
@@ -127,7 +127,7 @@ const ContactForms = () => {
 
         {/* Other Information */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 2 }}>
+          <Paper sx={{ p: 3, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Other Information:
             </Typography>
@@ -158,7 +158,7 @@ const ContactForms = () => {
           </Paper>
 
           {/* Active Status */}
-          <Paper sx={{ mt: 2, p: 2, display: "flex", alignItems: "center", gap: 1, borderRadius: 2 }}>
+          <Paper sx={{ mt: 2, p: 2, display: "flex", alignItems: "center", gap: 1, borderRadius: 2 }} elevation={0}>
             <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>Active Status*</Typography>
             <Switch defaultChecked />
           </Paper>

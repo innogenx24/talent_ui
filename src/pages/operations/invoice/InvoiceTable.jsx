@@ -1,19 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
+import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const InvoiceTable = () => {
-  const columns = [
-    { id: "id", label: "No." },
-    { id: "client_name", label: "Client Name" },
-    { id: "date", label: "Date" },
-    { id: "amount", label: "Amount" },
-    { id: "status", label: "Status" },
-  ];
+  const [invoices, setInvoices] = useState([]);
 
-  const data = [
-    { id: 1, client_name: "John Doe", date: "2024-02-10", amount: "$1500", status: "Paid" },
-    { id: 2, client_name: "Jane Smith", date: "2024-02-15", amount: "$2200", status: "Pending" },
+  useEffect(() => {
+    const fetchInvoices = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Get the token from localStorage
+  
+        const response = await axios.get(`${API_URL}/invoice-details`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Attach the token in headers
+          },
+        });
+  
+        const formattedInvoices = response.data.map((invoice, index) => {
+          // Calculate total candidate_qty and collect jd_ids
+          let totalCandidateQty = 0;
+          let jdIds = [];
+  
+          if (invoice.job_description && Array.isArray(invoice.job_description)) {
+            invoice.job_description.forEach((job) => {
+              totalCandidateQty += job.candidate_qty;
+              jdIds.push(job.jd_id);
+            });
+          }
+          
+  
+          return {
+            serial: index + 1,
+            invoice_id: invoice.invoice_id,
+            company_name: invoice.company_name,
+            start_date: invoice.start_date,
+            end_date: invoice.end_date,
+            contact_person: invoice.contact_person,
+            email: invoice.email,
+            phone_number: invoice.phone_number,
+            total_amount: `Rs.${parseFloat(invoice.total_amount).toLocaleString(
+              "en-IN",
+              {
+                maximumFractionDigits: 2,
+              }
+            )}`,
+            payment_type: invoice.payment_type,
+  
+            // New fields
+            total_candidate_qty: totalCandidateQty,
+            jd_ids: jdIds.join(", "), // Convert array to string
+          };
+        });
+  
+        setInvoices(formattedInvoices);
+      } catch (error) {
+        console.error("Error fetching invoices:", error);
+      }
+    };
+  
+    fetchInvoices();
+  }, []);
+  
+
+  const columns = [
+    { id: "serial", label: "No." },
+    { id: "jd_ids", label: "JD IDs" },
+    { id: "company_name", label: "Company Name" },
+    { id: "contact_person", label: "Client Name" },
+    { id: "email", label: "Email" },
+    { id: "phone_number", label: "Phone Number" },
+    { id: "start_date", label: "Start Date" },
+    { id: "end_date", label: "End Date" },
+    { id: "total_candidate_qty", label: "Total Candidates" },
+    { id: "payment_type", label: "Payment Type" },
+    { id: "total_amount", label: "Total Amount" },
   ];
 
   return (
@@ -22,7 +84,7 @@ const InvoiceTable = () => {
         Invoice List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={invoices} />
     </>
   );
 };

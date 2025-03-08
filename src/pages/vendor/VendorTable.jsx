@@ -1,28 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
+import axios from "axios";
+import API_URL from "../../api/Api_url";
 import DynamicTable from "../../components/table-format/DynamicTable";
 
 const VendorTable = () => {
-  const columns = [
-    { id: "id", label: "No." },
-    { id: "vendor_name", label: "Vendor Name" },
-    { id: "contact_person", label: "Contact Person" },
-    { id: "email", label: "Email" },
-    { id: "phone", label: "Phone Number" },
-  ];
+  const [vendors, setVendors] = useState([]);
 
-  const data = [
-    { id: 1, vendor_name: "ABC Staffing", contact_person: "Michael Johnson", email: "michael@abcstaffing.com", phone: "123-456-7890" },
-    { id: 2, vendor_name: "XYZ Recruitment", contact_person: "Sara Williams", email: "sara@xyzrecruitment.com", phone: "987-654-3210" },
+  useEffect(() => {
+    const fetchVendors = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/vendors`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        const formattedVendors = response.data.map((vendor, index) => ({
+          serial: index + 1,
+          id: vendor.id,
+          vendor_name: vendor.vendor_name,
+          vendor_owner: vendor.vendor_owner,
+          phone_number: vendor.phone_number,
+          email: vendor.email,
+          address_details: `${vendor.city}, ${vendor.state}, ${vendor.country} - ${vendor.pin_code}`,
+          status: vendor.active_status ? "Active" : "Inactive",
+        }));
+
+
+        setVendors(formattedVendors);
+      } catch (error) {
+        console.error("Error fetching vendors:", error);
+      }
+    };
+
+    fetchVendors();
+  }, []);
+
+  const columns = [
+    { id: "serial", label: "No." },
+    { id: "vendor_name", label: "Vendor Name" },
+    { id: "vendor_owner", label: "Vendor Owner" },
+    { id: "phone_number", label: "Phone Number" },
+    { id: "email", label: "Email" },
+    { id: "address_details", label: "Address" },
   ];
 
   return (
     <>
       <Typography variant="h6" sx={{ color: "#989FA9", mb: 2 }}>
-        Vendor List
+        Vendors List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={vendors} />
     </>
   );
 };

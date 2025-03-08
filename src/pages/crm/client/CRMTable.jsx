@@ -1,28 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import DynamicTable from "../../../components/table-format/DynamicTable";
+import axios from "axios";
+import API_URL from "../../../api/Api_url";
 
 const CRMTable = () => {
-  const columns = [
-    { id: "id", label: "No." },
-    { id: "customer_name", label: "Customer Name" },
-    { id: "email", label: "Email" },
-    { id: "phone", label: "Phone Number" },
-    { id: "status", label: "Status" },
-  ];
+  const [clients, setClients] = useState([]);
 
-  const data = [
-    { id: 1, customer_name: "Michael Scott", email: "michael@dundermifflin.com", phone: "123-456-7890", status: "Active" },
-    { id: 2, customer_name: "Pam Beesly", email: "pam@dundermifflin.com", phone: "987-654-3210", status: "Pending" },
+  useEffect(() => {
+    const fetchClients = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/client-details`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const formattedClients = response.data.map((client, index) => ({
+          serial: index + 1,
+          id: client.id,
+          company_name: client.company_name,
+          contact_name: `${client.first_name} ${client.last_name}`,
+          email: client.email,
+          phone_number: client.phone_number,
+          industry: client.industry,
+          location: `${client.city}`,
+          status: client.active_status ? "Active" : "Inactive",
+        }));
+
+        setClients(formattedClients);
+      } catch (error) {
+        console.error("Error fetching clients:", error);
+      }
+    };
+
+    fetchClients();
+  }, []);
+
+  const columns = [
+    { id: "serial", label: "No." },
+    { id: "company_name", label: "Company Name" },
+    { id: "contact_name", label: "Contact Person" },
+    { id: "email", label: "Email" },
+    { id: "phone_number", label: "Phone Number" },
+    { id: "industry", label: "Industry" },
+    { id: "location", label: "Location" },
+    { id: "status", label: "Status" },
   ];
 
   return (
     <>
       <Typography variant="h6" sx={{ color: "#989FA9", mb: 2 }}>
-        CRM Client List
+        Client Details List
       </Typography>
 
-      <DynamicTable columns={columns} data={data} />
+      <DynamicTable columns={columns} data={clients} />
     </>
   );
 };

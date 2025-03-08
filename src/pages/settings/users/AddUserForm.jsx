@@ -40,11 +40,16 @@ const AddUserForm = () => {
   const [departments, setDepartments] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [branches, setBranches] = useState([]);
+  const token = localStorage.getItem("token"); 
 
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await axios.get(`${API_URL}/roles`);
+        const response = await axios.get(`${API_URL}/roles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         setRoles(response.data);
       } catch (error) {
         console.error("Error fetching roles:", error);
@@ -53,7 +58,11 @@ const AddUserForm = () => {
 
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get(`${API_URL}/department`);
+        const response = await axios.get(`${API_URL}/department`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         setDepartments(response.data);
       } catch (error) {
         console.error("Error fetching departments:", error);
@@ -62,7 +71,11 @@ const AddUserForm = () => {
 
     const fetchBranches = async () => {
       try {
-        const response = await axios.get(`${API_URL}/branch`);
+        const response = await axios.get(`${API_URL}/branch`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         setBranches(response.data);
       } catch (error) {
         console.error("Error fetching branches:", error);
@@ -134,6 +147,8 @@ const AddUserForm = () => {
     }
   };
 
+
+  
   return (
     <Box sx={{ padding: "20px", minHeight: "100vh" }}>
       <Box
