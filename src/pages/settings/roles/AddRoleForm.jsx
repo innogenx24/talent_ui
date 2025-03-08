@@ -48,7 +48,6 @@ const AddRoleForm = () => {
     setLoading(true);
 
     const roleData = {
-      tenant_id: 1, // Static value
       name: roleName,
       department,
       description,

@@ -10,19 +10,22 @@ const RolesTable = () => {
   useEffect(() => {
     const fetchRoles = async () => {
       try {
-        const response = await axios.get(`${API_URL}/roles`);
-        console.log("API Response:", response.data); // Debugging API response
+        const token = localStorage.getItem("token"); 
+
+        const response = await axios.get(`${API_URL}/roles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const formattedRoles = response.data.map((role, index) => ({
           serial: index + 1,
           id: role.id,
           role_name: role.name,
           department: role.department,
-          description: role.description || "N/A", // Assuming description exist in API
+          description: role.description || "N/A",
           status: role.active_status ? "Active" : "Inactive",
         }));
-
-        console.log("Formatted Roles:", formattedRoles); // Debugging formatted data
 
         setRoles(formattedRoles);
       } catch (error) {
@@ -37,7 +40,7 @@ const RolesTable = () => {
     { id: "serial", label: "No." },
     { id: "role_name", label: "Role Name" },
     { id: "department", label: "Department" },
-    { id: "description", label: "description" },
+    { id: "description", label: "Description" },
   ];
 
 

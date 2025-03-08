@@ -10,8 +10,13 @@ const UsersTable = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`${API_URL}/users`);
-        console.log("API Response:", response.data); // Check if API data is coming
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/users`, {
+          headers:{
+            Authorization: `Bearer ${token}`,
+          }
+        })
   
         const formattedUsers = response.data.map((user, index) => ({
           serial: index + 1,
@@ -25,7 +30,6 @@ const UsersTable = () => {
           status: user.active_status ? "Active" : "Inactive",
         }));
   
-        console.log("Formatted Users:", formattedUsers); // Check if data is formatted correctly
   
         setUsers(formattedUsers);
       } catch (error) {

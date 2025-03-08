@@ -10,8 +10,14 @@ const DepartmentTable = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get(`${API_URL}/department`);
-        console.log("API Response:", response.data);
+
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/department`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
 
         const formattedData = response.data.map((item, index) => ({
           serial: index + 1,

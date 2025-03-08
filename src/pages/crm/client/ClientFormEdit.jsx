@@ -35,7 +35,7 @@ const ClientFormEdit = () => {
       <Grid container spacing={3}>
         {/* Client Details */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 2 }}>
+          <Paper sx={{ p: 3, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Client Details:
             </Typography>
@@ -103,7 +103,7 @@ const ClientFormEdit = () => {
 
         {/* Address Section */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 2 }}>
+          <Paper sx={{ p: 3, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Address:
             </Typography>
@@ -175,7 +175,7 @@ const ClientFormEdit = () => {
 
         {/* Other Information */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, borderRadius: 2 }}>
+          <Paper sx={{ p: 3, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Other Information:
             </Typography>
@@ -221,7 +221,7 @@ const ClientFormEdit = () => {
               </Grid>
             </Grid>
           </Paper>
-          <Paper sx={{ mt: 2, p: 2, borderRadius: 2 }}>
+          <Paper sx={{ mt: 2, p: 2, borderRadius: 2 }} elevation={0}>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold" }}>
               Control:
             </Typography>

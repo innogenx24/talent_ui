@@ -40,7 +40,7 @@ export const OrdersFormsEdit = () => {
       <Grid container spacing={3}>
         {/* First Column - Order Details */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ padding: 2 }}>
+          <Paper sx={{ padding: 2 }} elevation={0}>
             <Typography variant="h6">Order Details</Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
@@ -119,7 +119,7 @@ export const OrdersFormsEdit = () => {
 
         {/* Second Column - Client Details & Other Details */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ padding: 2, marginBottom: 2 }}>
+          <Paper sx={{ padding: 2, marginBottom: 2 }} elevation={0}>
             <Typography variant="h6">Client Details</Typography>
             <Grid container spacing={2}>
               <Grid item xs={6}>
@@ -156,7 +156,7 @@ export const OrdersFormsEdit = () => {
               </Grid>
             </Grid>
           </Paper>
-          <Paper sx={{ padding: 2 }}>
+          <Paper sx={{ padding: 2 }} elevation={0}>
             <Typography variant="h6">Other Details</Typography>
             <TextField
               select
@@ -177,7 +177,7 @@ export const OrdersFormsEdit = () => {
 
     {/* Third Column - Address Information */}
     <Grid item xs={12} md={4}>
-      <Paper sx={{ padding: 2 }}>
+      <Paper sx={{ padding: 2 }} elevation={0}>
         <Typography variant="h6">Address Information</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -246,7 +246,7 @@ export const OrdersFormsEdit = () => {
 
     {/* Full-Width Row - Job Description */}
     <Grid item xs={12}>
-      <Paper sx={{ padding: 2 }}>
+      <Paper sx={{ padding: 2 }} elevation={0}>
         <Typography variant="h6">Job Description</Typography>
         <Grid container spacing={2}>
           <Grid item xs={3}>

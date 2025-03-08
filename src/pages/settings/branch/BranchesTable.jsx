@@ -10,8 +10,14 @@ const BranchesTable = () => {
   useEffect(() => {
     const fetchBranches = async () => {
       try {
-        const response = await axios.get(`${API_URL}/branch`);
-        console.log("API Response:", response.data); // Debugging API response
+
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/branch`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
 
         const formattedBranches = response.data.map((branch, index) => ({
           serial: index + 1,
@@ -21,7 +27,6 @@ const BranchesTable = () => {
           status: branch.active_status ? "Active" : "Inactive",
         }));
 
-        console.log("Formatted Branches:", formattedBranches); // Debugging formatted data
 
         setBranches(formattedBranches);
       } catch (error) {

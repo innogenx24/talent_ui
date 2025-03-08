@@ -61,11 +61,13 @@ const LayOut = () => {
   };
 
   // Update selected tab on route change
+  
   useEffect(() => {
-    const currentIndex = navItems.findIndex(
-      (item) => item.path === location.pathname
-    );
-    if (currentIndex !== -1) {
+    const currentIndex = navItems.findIndex((item) => item.path === location.pathname);
+  
+    if (location.pathname === "/dashboard/settings") {
+      setSelectedTab(null);
+    } else if (currentIndex !== -1) {
       setSelectedTab(currentIndex);
     }
   }, [location.pathname]);

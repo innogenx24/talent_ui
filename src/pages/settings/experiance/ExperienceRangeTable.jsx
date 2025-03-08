@@ -10,14 +10,19 @@ const ExperienceRangeTable = () => {
   useEffect(() => {
     const fetchExperienceRanges = async () => {
       try {
-        const response = await axios.get(`${API_URL}/experience-range`);
-        console.log("API Response:", response.data); 
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`${API_URL}/experience-range`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const formattedData = response.data.map((item, index) => ({
           serial: index + 1,
           id: item.id,
           experience_range: item.experience_range,
-          description: item.description || "N/A", 
+          description: item.description || "N/A",
           status: item.active_status ? "Active" : "Inactive",
         }));
 
