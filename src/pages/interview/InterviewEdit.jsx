@@ -16,13 +16,13 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 
-export const AddInterview = () => {
+export const InterviewEdit = () => {
   return (
     <Box sx={{ p: 3 }}>
       {/* Top-right button */}
       <Grid container justifyContent="flex-end">
         <Button variant="contained" sx={{ mb: 2 }}>
-          Send to Candidate
+          Update Interview
         </Button>
       </Grid>
 
@@ -35,17 +35,13 @@ export const AddInterview = () => {
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Interview ID*"
-                  placeholder="Enter Interview ID"
-                  fullWidth
-                />
+                <TextField label="Interview ID*" value="INT-12345" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Date*"
-                    value={dayjs()}
+                    value={dayjs("2025-03-10")}
                     onChange={() => {}}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
@@ -53,19 +49,8 @@ export const AddInterview = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
-                  <InputLabel>Interview Name</InputLabel>
-                  <Select defaultValue="">
-                    <MenuItem value="">Select Interview</MenuItem>
-                    <MenuItem value="General">General Interview</MenuItem>
-                    <MenuItem value="Technical">Technical Interview</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <FormControl fullWidth>
                   <InputLabel>Interview Person*</InputLabel>
-                  <Select defaultValue="">
-                    <MenuItem value="">Select Person</MenuItem>
+                  <Select value="Person1">
                     <MenuItem value="Person1">Person 1</MenuItem>
                     <MenuItem value="Person2">Person 2</MenuItem>
                   </Select>
@@ -74,21 +59,17 @@ export const AddInterview = () => {
               <Grid item xs={12}>
                 <TextField
                   label="Interview Company Name"
-                  placeholder="Enter Company Name"
+                  value="Tech Solutions Inc."
                   fullWidth
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  label="Candidate ID*"
-                  placeholder="Enter Candidate ID"
-                  fullWidth
-                />
+                <TextField label="Candidate ID*" value="CAND-56789" fullWidth />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <FormControl fullWidth>
                   <InputLabel>Interview Type*</InputLabel>
-                  <Select defaultValue="Online">
+                  <Select value="Online">
                     <MenuItem value="Online">Online</MenuItem>
                     <MenuItem value="Offline">Offline</MenuItem>
                   </Select>
@@ -98,7 +79,7 @@ export const AddInterview = () => {
               <Grid item xs={12}>
                 <TextField
                   label="Meeting Link*"
-                  placeholder="Enter Link"
+                  value="https://meet.google.com/xyz"
                   fullWidth
                 />
               </Grid>
@@ -106,7 +87,7 @@ export const AddInterview = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Interview Start Date & Time*"
-                    value={dayjs()}
+                    value={dayjs("2025-03-15T10:00")}
                     onChange={() => {}}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
@@ -116,7 +97,7 @@ export const AddInterview = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     label="Interview End Date & Time*"
-                    value={dayjs()}
+                    value={dayjs("2025-03-15T11:00")}
                     onChange={() => {}}
                     renderInput={(params) => <TextField {...params} fullWidth />}
                   />
@@ -136,21 +117,21 @@ export const AddInterview = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Candidate Name"
-                  placeholder="Enter Candidate Name"
+                  value="John Doe"
                   fullWidth
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Phone Number*"
-                  placeholder="Enter Phone Number"
+                  value="+1 123-456-7890"
                   fullWidth
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   label="Email ID"
-                  placeholder="Enter Email ID"
+                  value="johndoe@example.com"
                   fullWidth
                 />
               </Grid>
@@ -165,9 +146,8 @@ export const AddInterview = () => {
               Interview Status
             </Typography>
             <FormControl fullWidth>
-              <InputLabel>Select</InputLabel>
-              <Select label="Select" defaultValue="">
-                <MenuItem value="">Select Status</MenuItem>
+              <InputLabel>Status</InputLabel>
+              <Select value="Scheduled">
                 <MenuItem value="Scheduled">Scheduled</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
                 <MenuItem value="Cancelled">Cancelled</MenuItem>
@@ -193,10 +173,10 @@ export const AddInterview = () => {
         </Grid>
       </Grid>
 
-      {/* Bottom Save Button - Centered & Padded */}
+      {/* Bottom Update Button - Centered & Padded */}
       <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-        <Button variant="contained" size="large" sx={{ px: 40 }}>
-          Save
+        <Button variant="contained" size="large" sx={{ px: 40, }}>
+          Save The Changes
         </Button>
       </Box>
     </Box>

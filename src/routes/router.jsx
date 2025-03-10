@@ -29,7 +29,6 @@ import ResumeBankTable from "../pages/candidate/ResumeBankTable";
 import ProfilePage from "../pages/user-profile/ProfilePage";
 import OrdersTable from "../pages/crm/OrdersTable";
 import QuotationTable from "../pages/crm/QuotationTable";
-import AddInterview from "../pages/interview/AddInterview";
 import AddVendorForm from "../pages/vendor/AddVendorForm.jsx";
 import EditVendorForm from "../pages/vendor/EditVendorForm.jsx";
 import AddUserForm from "../pages/settings/users/AddUserForm.jsx";
@@ -60,6 +59,19 @@ import { QuotationsFormEdit } from "../pages/crm/Quotations/QuotationsFormEdit.j
 import OrdersFormsEdit from "../pages/crm/Orders/OrdersFormsEdit.jsx";
 import ContactFormsEdit from "../pages/crm/contact/ContactFormsEdit.jsx";
 import RolesTable from "../pages/settings/roles/RolesTable.jsx";
+import { CandidateListAdd } from "../pages/candidate/cadidatelist/CandidateListAdd.jsx";
+import { CandidateListEdit } from "../pages/candidate/cadidatelist/CandidateListEdit.jsx";
+import { ResumeBankAdd } from "../pages/candidate/resumebank/ResumeBankAdd.jsx";
+import { ResumeBankEdit } from "../pages/candidate/resumebank/ResumeBankEdit.jsx";
+import { BenchAdd } from "../pages/candidate/bench/BenchAdd.jsx";
+import { BenchEdit } from "../pages/candidate/bench/BenchEdit.jsx";
+import { OnBoardingAdd } from "../pages/candidate/onboarding/OnBoardingAdd.jsx";
+import { OnBoardingEdit } from "../pages/candidate/onboarding/OnBoardingEdit.jsx";
+import { UpComingOffBoardingsAdd } from "../pages/candidate/UpComingOffBoardings/UpComingOffBoardingsAdd.jsx";
+import { UpComingOffBoardingsEdit } from "../pages/candidate/UpComingOffBoardings/UpComingOffBoardingsEdit.jsx";
+import { OffBoardedEdit } from "../pages/candidate/OffBoarded/OffBoardedEdit.jsx";
+import { AddInterview } from "../pages/interview/AddInterview.jsx";
+import { InterviewEdit } from "../pages/interview/InterviewEdit.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -81,9 +93,14 @@ const RoutesConfig = () => {
             <Route path="job_description/edit/:id" element={<JobDescIndex />} />
 
             <Route path="interview" element={<InterviewTable />} />
-            <Route path="interview/add" element={<AddInterview />} />
+            <Route path="interview/add" element={<AddInterview/>}/>
+            <Route path="interview/edit/:id" element={<InterviewEdit/>}/>
 
             <Route path="candidate" element={<CandidateTable />} />
+            <Route path="candidate/add" element={<CandidateListAdd />} />
+            <Route path="candidate/edit/:id" element={<CandidateListEdit/>} />
+            <Route path="candidate/resume-bank/add" element={<ResumeBankAdd/>} />
+            <Route path="candidate/resume-bank/edit/:id" element={<ResumeBankEdit/>} />
             <Route path="crm" element={<CRMTable />} />
             <Route path="crm/add" element={<ClientForm />} />
             <Route path="crm/edit/:id" element={<ClientFormEdit/>} />
@@ -110,18 +127,16 @@ const RoutesConfig = () => {
               element={<ResumeBankTable />}
             />
             <Route path="candidate/bench" element={<BenchTable />} />
-            <Route
-              path="candidate/on-boarding"
-              element={<OnBoardingTable />}
-            />
-            <Route
-              path="candidate/upcoming-off-boardings"
-              element={<UpcomingOffBoardingsTable />}
-            />
-            <Route
-              path="candidate/off-boarded"
-              element={<OffBoardedTable />}
-            />
+            <Route path="candidate/bench/add" element={<BenchAdd/>} />
+            <Route path="candidate/bench/Edit/:id" element={<BenchEdit/>} />
+            <Route path="candidate/on-boarding" element={<OnBoardingTable/>}/>
+            <Route path="candidate/on-boarding/add" element={<OnBoardingAdd/>}/>
+            <Route path="candidate/on-boarding/edit/:id" element={<OnBoardingEdit/>}/>
+            <Route path="candidate/upcoming-off-boardings"element={<UpcomingOffBoardingsTable />}/>
+            <Route path="candidate/upcoming-off-boardings/add"element={<UpComingOffBoardingsAdd/>}/>
+            <Route path="candidate/upcoming-off-boardings/edit/:id"element={<UpComingOffBoardingsEdit/>}/>
+            <Route path="candidate/off-boarded" element={<OffBoardedTable />}/>
+            <Route path="candidate/off-boarded/edit/:id" element={<OffBoardedEdit/>}/>
 
             <Route path="vendor" element={<VendorTable />} />
             <Route path="vendor/add" element={<AddVendorForm />} />
