@@ -25,6 +25,29 @@ import TimelineIcon from "@mui/icons-material/Timeline";
 import DescriptionIcon from "@mui/icons-material/Description";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
+import { MdOutlineComputer } from "react-icons/md";
+import { FaUserTie } from "react-icons/fa";
+import { MdOutlineAirlineSeatLegroomNormal } from "react-icons/md";
+import { FaBriefcase } from "react-icons/fa";
+import { GiBrainstorm } from "react-icons/gi";
+import { FaIndustry } from "react-icons/fa";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { MdQuestionAnswer } from "react-icons/md";
+import { MdTranslate } from "react-icons/md";
+import { MdTravelExplore } from "react-icons/md";
+import { MdDonutLarge } from "react-icons/md";
+import { MdAccessTime } from "react-icons/md";
+import { FaUserMinus } from "react-icons/fa";
+import { RiCurrencyFill } from "react-icons/ri";
+import { FaMoneyCheckAlt } from "react-icons/fa";
+
+
+
+
+
+
+
+
 
 
 const drawerWidth = 150;
@@ -87,6 +110,7 @@ const Sidebar = ({ section }) => {
             path: "/dashboard/candidate/off-boarded",
             icon: <AssignmentIcon />, 
           },
+      
         ];
         break;
   
@@ -137,27 +161,102 @@ const Sidebar = ({ section }) => {
           {
             text: "Users",
             path: "/dashboard/settings",
-            icon: <PeopleIcon />,
+            icon: <PeopleIcon size={24}/>,
           },
           {
             text: "Roles",
             path: "/dashboard/settings/roles",
-            icon: <AdminPanelSettingsIcon />,
+            icon: <AdminPanelSettingsIcon size={24} />,
           },
           {
             text: "Experience Range",
             path: "/dashboard/settings/experience-range",
-            icon: <TimelineIcon />,
+            icon: <TimelineIcon size={24}/>,
           },
           {
             text: "Department",
             path: "/dashboard/settings/department",
-            icon: <BusinessIcon />,
+            icon: <BusinessIcon size={24}/>,
           },
           {
             text: "Branch",
             path: "/dashboard/settings/branch",
-            icon: <ApartmentIcon />,
+            icon: <ApartmentIcon size={24}/>,
+          },
+          {
+            text: "Work Layout",
+            path: "/dashboard/settings/WorkLayout",
+            icon: <MdOutlineComputer size={24}/>,
+          },
+          {
+            text: "Candidate Status",
+            path: "/dashboard/settings/CandidateStatus",
+            icon: <FaUserTie size={24}/>,
+          },
+          {
+            text: "Bench Status",
+            path: "/dashboard/settings/BenchStatus",
+            icon: <MdOutlineAirlineSeatLegroomNormal size={24}/>,
+          },
+          {
+            text: "Job Title",
+            path: "/dashboard/settings/JobTitle",
+            icon: <FaBriefcase size={24}/>,
+          },
+          {
+            text: "Skills",
+            path: "/dashboard/settings/Skills",
+            icon: <GiBrainstorm size={24}/>,
+          },
+          {
+            text: "Industry",
+            path: "/dashboard/settings/Industry",
+            icon: <FaIndustry size={24}/>,
+          },
+          {
+            text: "Interview Name",
+            path: "/dashboard/settings/InterviewName",
+            icon: <FaChalkboardTeacher size={24}/>,
+          },
+          {
+            text: "Interview Status",
+            path: "/dashboard/settings/InterviewStatus",
+            icon: <MdQuestionAnswer size={24}/>,
+          },
+          {
+            text: "Language Proficiency ",
+            path: "/dashboard/settings/Languageproficiency",
+            icon: <MdTranslate size={24}/>,
+          },
+          {
+            text: "Source",
+            path: "/dashboard/settings/SourceSe",
+            icon: <MdTravelExplore size={24}/>,
+          },
+          {
+            text: "Overall Status",
+            path: "/dashboard/settings/OverallStatus",
+            icon: <MdDonutLarge size={24}/>, 
+          },
+          {
+            text: "Availability",
+            path: "/dashboard/settings/Availability",
+            icon: <MdAccessTime size={24}/>, 
+          },
+          {
+            text: "OffBoarding Reasons",
+            path: "/dashboard/settings/OffBoardingReasons",
+            icon: <FaUserMinus size={24}/>, 
+          },
+          {
+            text: "Currency",
+            path: "/dashboard/settings/Currency",
+            icon: <RiCurrencyFill size={24}/>, 
+          },
+          {
+            text: "RateType",
+            path: "/dashboard/settings/RateType",
+            icon: <FaMoneyCheckAlt size={24}/>, 
           },
         ];
         break;

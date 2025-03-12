@@ -72,6 +72,49 @@ import { UpComingOffBoardingsEdit } from "../pages/candidate/UpComingOffBoarding
 import { OffBoardedEdit } from "../pages/candidate/OffBoarded/OffBoardedEdit.jsx";
 import { AddInterview } from "../pages/interview/AddInterview.jsx";
 import { InterviewEdit } from "../pages/interview/InterviewEdit.jsx";
+import { WorkLayoutTable } from "../pages/settings/WorkLayout/WorkLayoutTable.jsx";
+import { CandidateStatusTable } from "../pages/settings/CandidateStatus/CandidateStatusTable.jsx";
+import { BenchStatusTable } from "../pages/settings/BenchStatus/BenchStatusTable.jsx";
+import { JobTitleTable } from "../pages/settings/JobTitle/JobTitleTable.jsx";
+import { SkillsTable } from "../pages/settings/Skills/SkillsTable.jsx";
+import { IndustryTable } from "../pages/settings/Industry/IndustryTable.jsx";
+import { InterviewNameTable } from "../pages/settings/InterviewName/InterviewNameTable.jsx";
+import { InterviewStatusTable } from "../pages/settings/InterviewStatus/InterviewStatusTable.jsx";
+import { LanguageproficiencyTable } from "../pages/settings/Languageproficiency/LanguageproficiencyTable.jsx";
+import { SourceTable } from "../pages/settings/SourceSe/SourceTable.jsx";
+import { OverallStatusTable } from "../pages/settings/OverallStatus/OverallStatusTable.jsx";
+import { AvailabilityTable } from "../pages/settings/Availability/AvailabilityTable.jsx";
+import { OffBoardingReasonsTable } from "../pages/settings/OffBoardingReasons/OffBoardingReasonsTable.jsx";
+import { CurrencyTable } from "../pages/settings/Currency/CurrencyTable.jsx";
+import { RateTypeTable } from "../pages/settings/RateType/RateTypeTable.jsx";
+import { WorkLayoutAdd } from "../pages/settings/WorkLayout/WorkLayoutAdd.jsx";
+import { WorkLayoutEdit } from "../pages/settings/WorkLayout/WorkLayoutEdit.jsx";
+import { CandidateStatusAdd } from "../pages/settings/CandidateStatus/CandidateStatusAdd.jsx";
+import { CandidateStatusEdit } from "../pages/settings/CandidateStatus/CandidateStatusEdit.jsx";
+import { BenchStatusAdd } from "../pages/settings/BenchStatus/BenchStatusAdd.jsx";
+import { BenchStatusEdit } from "../pages/settings/BenchStatus/BenchStatusEdit.jsx";
+import { JobTitleAdd } from "../pages/settings/JobTitle/JobTitleAdd.jsx";
+import { JobTitleEdit } from "../pages/settings/JobTitle/JobTitleEdit.jsx";
+import { SkillsAdd } from "../pages/settings/Skills/SkillsAdd.jsx";
+import { SkillsEdit } from "../pages/settings/Skills/SkillsEdit.jsx";
+import { IndustryAdd } from "../pages/settings/Industry/IndustryAdd.jsx";
+import { IndustryEdit } from "../pages/settings/Industry/IndustryEdit.jsx";
+import { InterviewNameAdd } from "../pages/settings/InterviewName/InterviewNameAdd.jsx";
+import { InterviewNameEdit } from "../pages/settings/InterviewName/InterviewNameEdit.jsx";
+import { InterviewStatusAdd } from "../pages/settings/InterviewStatus/InterviewStatusAdd.jsx";
+import { InterviewStatusEdit } from "../pages/settings/InterviewStatus/InterviewStatusEdit.jsx";
+import { SourceAdd } from "../pages/settings/SourceSe/SourceAdd.jsx";
+import { SourceEdit } from "../pages/settings/SourceSe/SourceEdit.jsx";
+import { OverallStatusAdd } from "../pages/settings/OverallStatus/OverallStatusAdd.jsx";
+import { OverallStatusEdit } from "../pages/settings/OverallStatus/OverallStatusEdit.jsx";
+import { AvailabilityAdd } from "../pages/settings/Availability/AvailabilityAdd.jsx";
+import { AvailabilityEdit } from "../pages/settings/Availability/AvailabilityEdit.jsx";
+import { OffBoardingReasonsAdd } from "../pages/settings/OffBoardingReasons/OffBoardingReasonsAdd.jsx";
+import { OffBoardingReasonsEdit } from "../pages/settings/OffBoardingReasons/OffBoardingReasonsEdit.jsx";
+import { CurrencyAdd } from "../pages/settings/Currency/CurrencyAdd.jsx";
+import { CurrencyEdit } from "../pages/settings/Currency/CurrencyEdit.jsx";
+import { RateTypeAdd } from "../pages/settings/RateType/RateTypeAdd.jsx";
+import { RateTypeEdit } from "../pages/settings/RateType/RateTypeEdit.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -150,6 +193,49 @@ const RoutesConfig = () => {
             <Route path="settings/roles" element={<RolesTable />} />
             <Route path="settings/roles/add" element={<AddRoleForm />} />
             <Route path="settings/roles/edit/:id" element={<EditRoleForm />} />
+            <Route path="settings/WorkLayout" element={<WorkLayoutTable />} />
+            <Route path="settings/WorkLayout/add" element={<WorkLayoutAdd/>} />
+            <Route path="settings/WorkLayout/edit/:id" element={<WorkLayoutEdit/>} />
+            <Route path="settings/CandidateStatus" element={<CandidateStatusTable/>} />
+            <Route path="settings/CandidateStatus/add" element={<CandidateStatusAdd/>} />
+            <Route path="settings/CandidateStatus/edit/:id" element={<CandidateStatusEdit/>} />
+            <Route path="settings/BenchStatus" element={<BenchStatusTable/>} />
+            <Route path="settings/BenchStatus/add" element={<BenchStatusAdd/>} />
+            <Route path="settings/BenchStatus/edit/:id" element={<BenchStatusEdit/>} />
+            <Route path="settings/JobTitle" element={<JobTitleTable/>} />
+            <Route path="settings/JobTitle/add" element={<JobTitleAdd/>} />
+            <Route path="settings/JobTitle/edit/:id" element={<JobTitleEdit/>} />
+            <Route path="settings/Skills" element={<SkillsTable/>} />
+            <Route path="settings/Skills/add" element={<SkillsAdd/>} />
+            <Route path="settings/Skills/edit/:id" element={<SkillsEdit/>} />
+            <Route path="settings/Industry" element={<IndustryTable/>}/>
+            <Route path="settings/Industry/add" element={<IndustryAdd/>}/>
+            <Route path="settings/Industry/edit/:id" element={<IndustryEdit/>}/>
+            <Route path="settings/InterviewName" element={<InterviewNameTable/>}/>
+            <Route path="settings/InterviewName/add" element={<InterviewNameAdd/>}/>
+            <Route path="settings/InterviewName/edit/:id" element={<InterviewNameEdit/>}/>
+            <Route path="settings/InterviewStatus" element={<InterviewStatusTable/>}/>
+            <Route path="settings/InterviewStatus/add" element={<InterviewStatusAdd/>}/>
+            <Route path="settings/InterviewStatus/edit/:id" element={<InterviewStatusEdit/>}/>
+            <Route path="settings/Languageproficiency" element={<LanguageproficiencyTable/>}/>
+            <Route path="settings/SourceSe" element={<SourceTable/>}/>
+            <Route path="settings/SourceSe/add" element={<SourceAdd/>}/>
+            <Route path="settings/SourceSe/edit/:id" element={<SourceEdit/>}/>
+            <Route path="settings/OverallStatus" element={<OverallStatusTable/>}/>
+            <Route path="settings/OverallStatus/add" element={<OverallStatusAdd/>}/>
+            <Route path="settings/OverallStatus/edit/:id" element={<OverallStatusEdit/>}/>
+            <Route path="settings/Availability" element={<AvailabilityTable/>}/>
+            <Route path="settings/Availability/add" element={<AvailabilityAdd/>}/>
+            <Route path="settings/Availability/edit/:id" element={<AvailabilityEdit/>}/>
+            <Route path="settings/OffBoardingReasons" element={<OffBoardingReasonsTable/>}/>
+            <Route path="settings/OffBoardingReasons/add" element={<OffBoardingReasonsAdd/>}/>
+            <Route path="settings/OffBoardingReasons/edit/:id" element={<OffBoardingReasonsEdit/>}/>
+            <Route path="settings/Currency" element={<CurrencyTable/>}/>
+            <Route path="settings/Currency/add" element={<CurrencyAdd/>}/>
+            <Route path="settings/Currency/edit/:id" element={<CurrencyEdit/>}/>
+            <Route path="settings/RateType" element={<RateTypeTable/>}/>
+            <Route path="settings/RateType/add" element={<RateTypeAdd/>}/>
+            <Route path="settings/RateType/edit/:id" element={<RateTypeEdit/>}/>
 
             <Route
               path="settings/experience-range"
@@ -170,6 +256,7 @@ const RoutesConfig = () => {
             <Route path="settings/branch" element={<BranchesTable />} />
             <Route path="settings/branch/add" element={<AddBranchForm />} />
             <Route path="settings/branch/edit/:id" element={<EditBranchForm />} />
+
 
             <Route path="profile" element={<ProfilePage />} />
             <Route path="profile/edit-profile/:id" element={<EditProfile />} />

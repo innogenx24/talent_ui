@@ -7,7 +7,7 @@ const SettingsTable = () => {
     { id: "id", label: "ID" },
     { id: "setting_name", label: "Setting Name" },
     { id: "value", label: "Value" },
-    { id: "updated_at", label: "Last Updated" },
+   
   ];
 
   const data = [
