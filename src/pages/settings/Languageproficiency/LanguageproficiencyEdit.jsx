@@ -1,28 +1,27 @@
 import React, { useState } from "react";
 import { Card, CardContent, TextField, Typography, Switch, FormControlLabel, Button, Grid, Box } from "@mui/material";
 
-export const RateTypeAdd = () => {
-  const [rateType, setRateType] = useState("");
-  const [description, setDescription] = useState("");
+export const LanguageproficiencyEdit = () => {
+  const [language, setLanguage] = useState("English");
+  const [description, setDescription] = useState("Fluent in English speaking and writing.");
   const [isActive, setIsActive] = useState(true);
 
   return (
     <Box sx={{ padding: "20px" }}>
       <Grid container spacing={2}>
-        {/* Left Form - Add Rate Type */}
+        {/* Left Form - Edit Language Proficiency */}
         <Grid item xs={12} md={5}>
           <Card>
             <CardContent>
               <Typography variant="h6" fontWeight="bold">
-                Add Rate Type
+                Edit Language Proficiency
               </Typography>
               <TextField
-                label="Rate Type*"
+                label="Language Proficiency*"
                 fullWidth
                 margin="normal"
-                placeholder="Enter Rate Type"
-                value={rateType}
-                onChange={(e) => setRateType(e.target.value)}
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
               />
               <TextField
                 label="Description"
@@ -30,7 +29,6 @@ export const RateTypeAdd = () => {
                 margin="normal"
                 multiline
                 rows={3}
-                placeholder="Enter Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />

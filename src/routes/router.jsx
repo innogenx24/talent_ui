@@ -80,7 +80,7 @@ import { SkillsTable } from "../pages/settings/Skills/SkillsTable.jsx";
 import { IndustryTable } from "../pages/settings/Industry/IndustryTable.jsx";
 import { InterviewNameTable } from "../pages/settings/InterviewName/InterviewNameTable.jsx";
 import { InterviewStatusTable } from "../pages/settings/InterviewStatus/InterviewStatusTable.jsx";
-import { LanguageproficiencyTable } from "../pages/settings/Languageproficiency/LanguageproficiencyTable.jsx";
+import { LanguageProficiencyTable } from "../pages/settings/Languageproficiency/LanguageproficiencyTable.jsx";
 import { SourceTable } from "../pages/settings/SourceSe/SourceTable.jsx";
 import { OverallStatusTable } from "../pages/settings/OverallStatus/OverallStatusTable.jsx";
 import { AvailabilityTable } from "../pages/settings/Availability/AvailabilityTable.jsx";
@@ -115,6 +115,8 @@ import { CurrencyAdd } from "../pages/settings/Currency/CurrencyAdd.jsx";
 import { CurrencyEdit } from "../pages/settings/Currency/CurrencyEdit.jsx";
 import { RateTypeAdd } from "../pages/settings/RateType/RateTypeAdd.jsx";
 import { RateTypeEdit } from "../pages/settings/RateType/RateTypeEdit.jsx";
+import { LanguageproficiencyAdd } from "../pages/settings/Languageproficiency/LanguageproficiencyAdd.jsx";
+import { LanguageproficiencyEdit } from "../pages/settings/Languageproficiency/LanguageproficiencyEdit.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -217,7 +219,9 @@ const RoutesConfig = () => {
             <Route path="settings/InterviewStatus" element={<InterviewStatusTable/>}/>
             <Route path="settings/InterviewStatus/add" element={<InterviewStatusAdd/>}/>
             <Route path="settings/InterviewStatus/edit/:id" element={<InterviewStatusEdit/>}/>
-            <Route path="settings/Languageproficiency" element={<LanguageproficiencyTable/>}/>
+            <Route path="settings/Languageproficiency" element={<LanguageProficiencyTable/>}/>
+            <Route path="settings/Languageproficiency/add" element={<LanguageproficiencyAdd/>}/>
+            <Route path="settings/Languageproficiency/edit/:id" element={<LanguageproficiencyEdit/>}/>
             <Route path="settings/SourceSe" element={<SourceTable/>}/>
             <Route path="settings/SourceSe/add" element={<SourceAdd/>}/>
             <Route path="settings/SourceSe/edit/:id" element={<SourceEdit/>}/>
