@@ -61,7 +61,6 @@ import ContactFormsEdit from "../pages/crm/contact/ContactFormsEdit.jsx";
 import RolesTable from "../pages/settings/roles/RolesTable.jsx";
 import { CandidateListAdd } from "../pages/candidate/cadidatelist/CandidateListAdd.jsx";
 import { CandidateListEdit } from "../pages/candidate/cadidatelist/CandidateListEdit.jsx";
-import { ResumeBankAdd } from "../pages/candidate/resumebank/ResumeBankAdd.jsx";
 import { ResumeBankEdit } from "../pages/candidate/resumebank/ResumeBankEdit.jsx";
 import { BenchAdd } from "../pages/candidate/bench/BenchAdd.jsx";
 import { BenchEdit } from "../pages/candidate/bench/BenchEdit.jsx";
@@ -117,6 +116,7 @@ import { RateTypeAdd } from "../pages/settings/RateType/RateTypeAdd.jsx";
 import { RateTypeEdit } from "../pages/settings/RateType/RateTypeEdit.jsx";
 import { LanguageproficiencyAdd } from "../pages/settings/Languageproficiency/LanguageproficiencyAdd.jsx";
 import { LanguageproficiencyEdit } from "../pages/settings/Languageproficiency/LanguageproficiencyEdit.jsx";
+import { ResumeBankAdd } from "../pages/candidate/resumebank/ResumeBankAdd.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -144,8 +144,8 @@ const RoutesConfig = () => {
             <Route path="candidate" element={<CandidateTable />} />
             <Route path="candidate/add" element={<CandidateListAdd />} />
             <Route path="candidate/edit/:id" element={<CandidateListEdit/>} />
-            <Route path="candidate/resume-bank/add" element={<ResumeBankAdd/>} />
             <Route path="candidate/resume-bank/edit/:id" element={<ResumeBankEdit/>} />
+            <Route path="candidate/resume-bank/add" element={<ResumeBankAdd/>} />
             <Route path="crm" element={<CRMTable />} />
             <Route path="crm/add" element={<ClientForm />} />
             <Route path="crm/edit/:id" element={<ClientFormEdit/>} />
