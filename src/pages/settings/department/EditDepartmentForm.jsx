@@ -8,43 +8,80 @@ import {
   Typography,
   Switch,
 } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
+import API_URL from "../../../api/Api_url";
 
-const dummyData = {
-  department: "Engineering",
-  description: "Handles all technical development and innovation.",
-  activeStatus: true,
-};
-
-const EditDepartmentForm = ({ existingData = dummyData, onSave }) => {
+const EditDepartmentForm = () => {
   const [department, setDepartment] = useState("");
   const [description, setDescription] = useState("");
   const [activeStatus, setActiveStatus] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  // Fetch existing department data based on ID
   useEffect(() => {
-    if (existingData) {
-      setDepartment(existingData.department || "");
-      setDescription(existingData.description || "");
-      setActiveStatus(existingData.activeStatus || false);
-    }
-  }, [existingData]);
+    const fetchDepartment = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_URL}/department/${id}`);
+        if (!response.ok) throw new Error("Failed to fetch department details");
+        const data = await response.json();
 
-  const handleSaveDepartment = () => {
-    const updatedDepartment = {
-      department,
-      description,
-      activeStatus,
+        setDepartment(data.department_name || "");
+        setDescription(data.description || "");
+        setActiveStatus(data.active_status || false);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
-    onSave(updatedDepartment);
+
+    if (id) fetchDepartment();
+  }, [id]);
+
+  // Handle updating department details
+  const handleSaveDepartment = async () => {
+
+    const updatedDepartment = {
+      department_name: department,
+      description: description,
+      active_status: activeStatus,
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/department/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedDepartment),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update department");
+      }
+      navigate("/dashboard/settings/department");
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Failed to update department. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <Box
-      sx={{
-        padding: "20px",
-        minHeight: "100vh",
-        width: { xs: "200%", md: "80%" },
-      }}
-    >
+    <Box sx={{ padding: "20px", minHeight: "100vh", width: { xs: "100%", md: "80%" } }}>
+      <Typography variant="h5" textAlign="center" mb={2}>
+        Edit Department
+      </Typography>
+
+      {loading && <Typography align="center">Loading...</Typography>}
+      {error && <Typography color="error" align="center">{error}</Typography>}
+
       <Box
         sx={{
           display: "flex",
@@ -53,10 +90,11 @@ const EditDepartmentForm = ({ existingData = dummyData, onSave }) => {
           justifyContent: "center",
         }}
       >
+        {/* Left Section - Edit Department */}
         <Card elevation={0} sx={{ flex: 1, minWidth: { xs: "100%", md: "50%" }, p: 2 }}>
           <CardContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Typography variant="h6" gutterBottom>
-              Edit Department:
+              Department Details:
             </Typography>
 
             <TextField
@@ -79,6 +117,7 @@ const EditDepartmentForm = ({ existingData = dummyData, onSave }) => {
           </CardContent>
         </Card>
 
+        {/* Right Section - Control */}
         <Card elevation={0} sx={{ minWidth: { xs: "100%", md: "30%" }, p: 2 }}>
           <CardContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Typography variant="h6">Control:</Typography>
@@ -94,6 +133,7 @@ const EditDepartmentForm = ({ existingData = dummyData, onSave }) => {
         </Card>
       </Box>
 
+      {/* Save Button */}
       <Box display="flex" justifyContent="center" mt={3}>
         <Button
           variant="contained"
@@ -101,8 +141,9 @@ const EditDepartmentForm = ({ existingData = dummyData, onSave }) => {
           size="large"
           sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }}
           onClick={handleSaveDepartment}
+          disabled={loading}
         >
-          Save Changes
+          {loading ? "Saving..." : "Save Changes"}
         </Button>
       </Box>
     </Box>

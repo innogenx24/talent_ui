@@ -117,6 +117,8 @@ import { RateTypeEdit } from "../pages/settings/RateType/RateTypeEdit.jsx";
 import { LanguageproficiencyAdd } from "../pages/settings/Languageproficiency/LanguageproficiencyAdd.jsx";
 import { LanguageproficiencyEdit } from "../pages/settings/Languageproficiency/LanguageproficiencyEdit.jsx";
 import { ResumeBankAdd } from "../pages/candidate/resumebank/ResumeBankAdd.jsx";
+import { EditJobDescriptionForm } from "../pages/job-descriptions/EditJobDescriptionForm.jsx";
+import JobDescriptionFormAdd from "../pages/job-descriptions/JobDescriptionFormAdd.jsx";
 const ProtectedRoute = ({ element }) => {
   const user = useSelector((state) => state.auth.user);
   return user ? element : <Navigate to="/signin" replace />;
@@ -134,8 +136,8 @@ const RoutesConfig = () => {
           <Route index element={<DashBoard />} />
 
             <Route path="job_description" element={<JobDescIndex />} />
-            <Route path="job_description/add" element={<JobDescIndex />} />
-            <Route path="job_description/edit/:id" element={<JobDescIndex />} />
+            <Route path="job_description/add" element={<JobDescriptionFormAdd/>} />
+            <Route path="job_description/edit/:id" element={<EditJobDescriptionForm/>} />
 
             <Route path="interview" element={<InterviewTable />} />
             <Route path="interview/add" element={<AddInterview/>}/>

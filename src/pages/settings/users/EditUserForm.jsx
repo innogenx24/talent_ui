@@ -50,7 +50,7 @@ const EditUserForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userRes, rolesRes, departmentsRes,branchesRes] = await Promise.all([
+        const [userRes, rolesRes, departmentsRes, branchesRes] = await Promise.all([
           axios.get(`${API_URL}/users/${id}`),
           axios.get(`${API_URL}/roles`),
           axios.get(`${API_URL}/department`),
@@ -60,8 +60,8 @@ const EditUserForm = () => {
         const userData = userRes.data;
         setUserData({
           joiningDate: userData.joining_date || "",
-          firstName: userData.first_name || "",
-          lastName: userData.last_name || "",
+          first_name: userData.first_name || "",
+          last_name: userData.last_name || "",
           loginId: userData.login_id || "",
           password: "",
           role: userData.role || "",
@@ -80,7 +80,7 @@ const EditUserForm = () => {
 
         setRoles(rolesRes.data || []);
         setDepartments(departmentsRes.data || []);
-        setBranches(branchesRes.data || []); 
+        setBranches(branchesRes.data || []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -209,8 +209,8 @@ const EditUserForm = () => {
                 <TextField
                   fullWidth
                   label="First Name*"
-                  name="firstName"
-                  value={userData.firstName}
+                  name="first_name"
+                  value={userData.first_name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -232,29 +232,29 @@ const EditUserForm = () => {
               </Grid>
 
               <Grid item xs={12} md={6}>
-  <FormControl fullWidth>
-    <InputLabel>Branch</InputLabel>
-    <Select
-      name="branch"
-      value={userData.branch}
-      onChange={handleChange}
-    >
-      {branches.map((branch) => (
-        <MenuItem key={branch.id} value={branch.branch_name}>
-          {branch.branch_name}
-        </MenuItem>
-      ))}
-    </Select>
-  </FormControl>
-</Grid>
+                <FormControl fullWidth>
+                  <InputLabel>Branch</InputLabel>
+                  <Select
+                    name="branch"
+                    value={userData.branch}
+                    onChange={handleChange}
+                  >
+                    {branches.map((branch) => (
+                      <MenuItem key={branch.id} value={branch.branch_name}>
+                        {branch.branch_name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
 
 
               <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
                   label="Last Name*"
-                  name="lastName"
-                  value={userData.lastName}
+                  name="last_name"
+                  value={userData.last_name}
                   onChange={handleChange}
                 />
               </Grid>

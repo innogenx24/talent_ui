@@ -8,18 +8,51 @@ import {
   Typography,
   Switch,
 } from "@mui/material";
+import API_URL from "../../../api/Api_url";
+import { useNavigate } from "react-router-dom";
 
 const AddDepartmentForm = () => {
   const [department, setDepartment] = useState("");
   const [description, setDescription] = useState("");
-  const [activeStatus, setActiveStatus] = useState(true);
+  const [activeStatus, setActiveStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  
 
-  const handleSaveDepartment = () => {
-    console.log({
-      department,
-      description,
-      activeStatus,
-    });
+  const handleSaveDepartment = async () => {
+    setLoading(true);
+    setError(null);
+
+    const departmentData = {
+      department_name: department,
+      description: description,
+      active_status: activeStatus,
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/department/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(departmentData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create department");
+      }
+
+      const result = await response.json();
+      navigate("/dashboard/settings/department");
+     
+
+    } catch (err) {
+      console.error("Error:", err);
+      setError("Failed to create department. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,10 +122,18 @@ const AddDepartmentForm = () => {
           size="large"
           sx={{ width: { xs: "100%", sm: "60%", md: "30%" } }}
           onClick={handleSaveDepartment}
+          disabled={loading}
         >
-          Save Department
+          {loading ? "Saving..." : "Save Department"}
         </Button>
       </Box>
+
+      {/* Error Message */}
+      {error && (
+        <Typography color="error" align="center" mt={2}>
+          {error}
+        </Typography>
+      )}
     </Box>
   );
 };
