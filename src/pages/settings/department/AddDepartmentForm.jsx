@@ -24,8 +24,11 @@ const AddDepartmentForm = () => {
     setLoading(true);
     setError(null);
 
+
+    ///rajuking
     const departmentData = {
       department_name: department,
+
       description: description,
       active_status: activeStatus,
     };
